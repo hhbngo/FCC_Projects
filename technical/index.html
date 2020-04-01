@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="stylesheet" href="stylesheet/main.css" />
+    <title>AutoIt Technical</title>
+  </head>
+  <body>
+    <nav id="nav">
+      <h1 id="title">
+        AutoIt Documentation
+      </h1>
+      <ul class="nav__links">
+        <li><a href="#declaring_variables">Declaring Variables</a></li>
+        <li><a href="#declaring_constants">Declaring Constants</a></li>
+        <li><a href="#scopes">Scope</a></li>
+        <li><a href="#arrays_maps">Arrays and Maps</a></li>
+        <li><a href="#arrays">Arrays</a></li>
+        <li><a href="#reference">Refernces/Source</a></li>
+        <li><a href="#">etc...</a></li>
+        <li><a href="#">. . .</a></li>
+        <li><a href="#">. . .</a></li>
+        <li><a href="#">. . .</a></li>
+        <li><a href="#">. . .</a></li>
+        <li><a href="#">. . .</a></li>
+        <li><a href="#">. . .</a></li>
+        <li><a href="#">. . .</a></li>
+        <li><a href="#">. . .</a></li>
+        <li><a href="#">. . .</a></li>
+        <li><a href="#">. . .</a></li>
+        <li><a href="#">. . .</a></li>
+      </ul>
+    </nav>
+    <main id="main">
+      <div id="declaring_variables" class="textblock">
+        <h2 class="textblock__title">Declaring Variables</h2>
+        <p class="plain__text">
+          Variables are declared and created with the Local and Global keywords
+          - Dim can also be used, although this is not recommended.
+        </p>
+        <p class="example__box">
+          <a href="https://www.autoitscript.com/autoit3/docs/keywords/Dim.htm"
+            >Local
+          </a>
+          $vVariable
+        </p>
+        <p class="plain__text">
+          Or you can declare multiple variables at once:
+        </p>
+        <p class="example__box">
+          <a href="https://www.autoitscript.com/autoit3/docs/keywords/Dim.htm"
+            >Global
+          </a>
+          $vVariable1<span style="color: orange;"><b>,</b></span> $vVariable2
+        </p>
+        <p class="plain__text">
+          You can also assign a variable <b>without</b> declaring it first, but
+          many prefer explicit declarations.
+        </p>
+        <p class="example__box">
+          $vVariable <span style="color: orange;"><b> = </b></span>
+          <span style="color: rgb(255, 59, 59);">"Create and Assign"</span>
+        </p>
+      </div>
+      <div id="declaring_constants" class="textblock">
+        <h2 class="textblock__title">Declaring Constants</h2>
+        <p class="plain__text">
+          Constants are declared and created using Const keyword and must be
+          initialised with a value:
+        </p>
+        <p class="example__box">
+          <a href="https://www.autoitscript.com/autoit3/docs/keywords/Dim.htm"
+            >Const
+          </a>
+          $iConst1 <span style="color: orange;"><b> = </b></span>
+          <span style="color: blue;">1</span
+          ><span style="color: orange;"><b>,</b></span> $iConst2 =
+          <span style="color: blue;">12</span>
+        </p>
+        <p class="plain__text">
+          Constants can also be declared and initialized using the Enum keyword:
+        </p>
+        <ul class="example__box">
+          <li>
+            <a href="https://www.autoitscript.com/autoit3/docs/keywords/Dim.htm"
+              >Enum
+            </a>
+            $eConst1 <span style="color: orange;"><b> = </b></span>
+            <span style="color: blue;">1</span
+            ><span style="color: orange;"><b>,</b></span> $eConst2<span
+              style="color: orange;"
+              ><b>,</b></span
+            >
+            $eConst3 <span style="color: rgb(39, 150, 39);">; 1, 2, 3</span>
+          </li>
+          <li>
+            <a href="https://www.autoitscript.com/autoit3/docs/keywords/Dim.htm"
+              >Enum
+            </a>
+            Step 2 $eIncr0<span style="color: orange;"><b>,</b></span>
+            $eIncr2<span style="color: orange;"><b>,</b></span> $eIncr4
+            <span style="color: rgb(39, 150, 39);">; 0, 2, 4</span>
+          </li>
+          <li>
+            <a href="https://www.autoitscript.com/autoit3/docs/keywords/Dim.htm"
+              >Enum
+            </a>
+            Step *2 $eMult1<span style="color: orange;"><b>,</b></span>
+            $eMult2<span style="color: orange;"><b>,</b></span> $eMult4
+            <span style="color: rgb(39, 150, 39);">; 1, 2, 4</span>
+          </li>
+        </ul>
+        <p class="plain__text">
+          Once a constant has been assigned, it cannot be changed.
+        </p>
+      </div>
+      <div id="scopes" class="textblock">
+        <h2 class="textblock__title">Scopes</h2>
+        <p class="plain__text">
+          A variable's scope is controlled by when and how you declare the
+          variable. If you declare a variable at the start of your script and
+          outside any functions it exists in the global scope and can be read or
+          changed from anywhere in the scripy
+        </p>
+        <p class="plain__text">
+          If you declare a variable inside a function it is in local scope and
+          can only be used within that same function. Variables created inside
+          functions are automatically destroyed when the function ends.
+        </p>
+        <p class="plain__text">
+          By default when variables are declared using Dim or assigned in a
+          function they have local scope unless there is a global variable of
+          the same name in which case the global variable is reused. This can be
+          altered by using the Local and Global keywords to declare variables
+          and force the scope you want.
+        </p>
+        <p class="plain__text">
+          See Static for details on how to use this keyword as part of the scope
+          declaration.
+        </p>
+      </div>
+      <div id="arrays_maps" class="textblock">
+        <h2 class="textblock__title">Arrays and Maps</h2>
+        <p class="plain__text">
+          AutoIt has 2 types of data collection variables: Arrays and Maps.
+          Arrays are much faster for random access and can have multiple
+          dimensions - a dimension size is fixed at the initially declared value
+          although it can be altered using ReDim. Arrays are indexed using
+          integer values referring to the order of elements and start at
+          element[0] - elements can be extracted using the integer index or
+          iterated by a simple For...Next loop. Maps are better for
+          records/dictionary type access and have a single dimension. They are
+          indexed using either integer or string keys integers do not refer to
+          the order of elements and are dynamically resized as values are added
+          or removed. A value can only be accessed by using the original key -
+          these keys can be iterated using the TableKeys function. Both Arrays
+          and Maps use similar syntax, so care is required to ensure the
+          variable is of the correct datatype - this is determined by the first
+          declaration line for the variable: Using empty [ ] declares a Map:
+        </p>
+        <p class="example__box">
+          <a href="https://www.autoitscript.com/autoit3/docs/keywords/Dim.htm"
+            >Local </a
+          >$mVar<span style="color: orange;">[]</span>
+          <span style="color: rgb(39, 150, 39);">; A Map</span>
+        </p>
+        <p class="plain__text">
+          Filling the [ ] with a dimension size declares an Array:
+        </p>
+        <p class="example__box">
+          <a href="https://www.autoitscript.com/autoit3/docs/keywords/Dim.htm"
+            >Local </a
+          >$aVar<span style="color: orange;"><b>[</b></span
+          ><span style="color: blue;">3</span
+          ><span style="color: orange;"><b>]</b></span>
+          <span style="color: rgb(39, 150, 39);">; An Array</span>
+        </p>
+        <p class="plain__text">
+          Assigning element values when declaring makes the variable an Array -
+          these three lines are functionally equivalent:
+        </p>
+        <ul class="example__box">
+          <li>
+            <a href="https://www.autoitscript.com/autoit3/docs/keywords/Dim.htm"
+              >Local </a
+            >$vVar<span style="color: orange;"><b>[</b></span
+            ><span style="color: blue;">3</span
+            ><span style="color: orange;"><b>] = </b></span>
+            <span style="color: orange;"><b>[</b></span
+            ><span style="color: blue;"> 1, 2, 3 </span
+            ><span style="color: orange;"><b>] </b></span>
+            <span style="color: rgb(39, 150, 39);">; An Array</span>
+          </li>
+          <li>
+            <a href="https://www.autoitscript.com/autoit3/docs/keywords/Dim.htm"
+              >Local </a
+            >$vVar<span style="color: orange;">[]</span>
+            <span style="color: orange;"><b> = </b></span>
+            <span style="color: orange;"><b>[</b></span
+            ><span style="color: blue;"> 1, 2, 3 </span
+            ><span style="color: orange;"><b>] </b></span>
+            <span style="color: rgb(39, 150, 39);">; An Array</span>
+          </li>
+          <li>
+            <a href="https://www.autoitscript.com/autoit3/docs/keywords/Dim.htm"
+              >Local </a
+            >$vVar <span style="color: orange;"><b> = </b></span>
+            <span style="color: orange;"><b>[</b></span
+            ><span style="color: blue;"> 1, 2, 3 </span
+            ><span style="color: orange;"><b>] </b></span>
+            <span style="color: rgb(39, 150, 39);">; An Array</span>
+          </li>
+        </ul>
+      </div>
+      <div id="arrays" class="textblock">
+        <h2 class="textblock__title">Arrays</h2>
+        <p class="plain__text">
+          An Array is a variable containing a series of data elements. Each
+          element in this variable can be accessed by an index number which
+          relates to the position of the element within the Array - in AutoIt
+          the first element of an Array is always element [0]. Arrays elements
+          are stored in a defined order and can be sorted.
+        </p>
+        <p class="plain__text">
+          You want to store a list of names: "Jasper", "Beethoven", "Pinky" and
+          "Fidget". You could use four separate variables to do so, but using an
+          Array is more efficient:
+        </p>
+        <ul class="example__box">
+          <li>
+            <a href="https://www.autoitscript.com/autoit3/docs/keywords/Dim.htm"
+              >Local </a
+            >$aArray<span style="color: orange;"><b>[</b></span
+            ><span style="color: blue;">4</span
+            ><span style="color: orange;"><b>]</b></span>
+          </li>
+          <li>
+            $aArray<span style="color: orange;"><b>[</b></span
+            ><span style="color: blue;">0</span
+            ><span style="color: orange;"><b>] = </b></span>
+            <span style="color: red;">"Jasper"</span>
+          </li>
+          <li>
+            $aArray<span style="color: orange;"><b>[</b></span
+            ><span style="color: blue;">0</span
+            ><span style="color: orange;"><b>] = </b></span>
+            <span style="color: red;">"Beethoven"</span>
+          </li>
+          <li>
+            $aArray<span style="color: orange;"><b>[</b></span
+            ><span style="color: blue;">2</span
+            ><span style="color: orange;"><b>] = </b></span>
+            <span style="color: red;">"Pinky"</span>
+          </li>
+          <li>
+            $aArray<span style="color: orange;"><b>[</b></span
+            ><span style="color: blue;">3</span
+            ><span style="color: orange;"><b>] = </b></span>
+            <span style="color: red;">"Fidget"</span>
+          </li>
+        </ul>
+      </div>
+      <div id="reference" class="textblock">
+        <h2 class="textblock__title">Reference/Source</h2>
+        <p class="plain__text">
+          All the documentation in this page is taken from
+          <a
+            href="https://www.autoitscript.com/autoit3/docs/intro/lang_variables.htm"
+            >AutoIt</a
+          >
+        </p>
+      </div>
+    </main>
+  </body>
+</html>

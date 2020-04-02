@@ -18,7 +18,7 @@ body::before {
   position: fixed;
   top: 0;
   left: 0;
-  height: 1078px;
+  height: 100vh;
   width: 100%;
   z-index: -1;
   background: url("https://i.imgur.com/lwiDMcm.jpg");

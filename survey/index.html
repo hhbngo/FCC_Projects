@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="stylesheet" href="stylesheet/main.css" />
+    <title>Social Media Survey</title>
+  </head>
+  <body>
+    <div id="container">
+      <header id="header">
+        <h1>Social Media Survey</h1>
+        <p>Please take a moment to take this survey about social media usage</p>
+      </header>
+      <form id="survey-form">
+        <div id="form__section">
+          <label id="name-label" for="name">Name</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            class="form-control"
+            placeholder="Enter your name"
+            required
+          />
+        </div>
+        <div id="form__section">
+          <label id="email-label" for="email">Email</label>
+          <input
+            type="text"
+            name="email"
+            id="email"
+            class="form-control"
+            placeholder="Enter your email"
+            required
+          />
+        </div>
+        <div id="form__section">
+          <label id="age-label" for="age">Age</label>
+          <input
+            type="number"
+            name="age"
+            id="number"
+            min="6"
+            max="110"
+            class="form-control"
+            placeholder="Age"
+          />
+        </div>
+
+        <div id="form__section">
+          <p>Which option best describes your current role?</p>
+          <select id="dropdown" name="role" class="form-control" required>
+            <option disabled selected value>Select current role</option>
+            <option value="student">Student</option>
+            <option value="job">Full Time Job</option>
+            <option value="learner">Full Time Learner</option>
+            <option value="preferNo">Prefer not to say</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div
+          id="form__section"
+          class="radiospacing"
+          style="white-space: nowrap;"
+        >
+          <p>What is your current marital status?</p>
+          <div class="radiowrapper">
+            <label
+              ><input
+                name="marriedstatus"
+                value="Single"
+                type="radio"
+                class="input-radio"
+                checked
+              />Single</label
+            >
+            <label>
+              <input
+                name="marriedstatus"
+                value="Married"
+                type="radio"
+                class="input-radio"
+              />Married</label
+            >
+            <label>
+              <input
+                name="marriedstatus"
+                value="Seperated"
+                type="radio"
+                class="input-radio"
+              />Seperated</label
+            >
+            <label>
+              <input
+                name="marriedstatus"
+                value="Divorced"
+                type="radio"
+                class="input-radio"
+              />Divorced</label
+            >
+            <label>
+              <input
+                name="marriedstatus"
+                value="Widowed"
+                type="radio"
+                class="input-radio"
+              />Widowed</label
+            >
+          </div>
+        </div>
+        <div id="form__section">
+          <p style="white-space: nowrap;">Which kind of phone are you using?</p>
+          <select id="dropdown" name="phone" class="form-control" required>
+            <option disabled selected value>Select current phone OS</option>
+            <option value="apple">Apple</option>
+            <option value="andriod">Andriod</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div id="form__section" class="checkspacing">
+          <p style="font-size: 18px;">
+            Which of these social media sites do you use?
+            <span class="small">(Check all that apply)</span>
+          </p>
+          <label
+            ><input
+              name="socialM"
+              value="Facebook"
+              type="checkbox"
+              class="input-checkbox"
+            />Facebook
+          </label>
+          <label
+            ><input
+              name="socialM"
+              value="Instagram"
+              type="checkbox"
+              class="input-checkbox"
+            />Instagram
+          </label>
+          <label
+            ><input
+              name="socialM"
+              value="Snapchat"
+              type="checkbox"
+              class="input-checkbox"
+            />Snapchat
+          </label>
+          <label
+            ><input
+              name="socialM"
+              value="Twitter"
+              type="checkbox"
+              class="input-checkbox"
+            />Twitter
+          </label>
+          <label
+            ><input
+              name="socialM"
+              value="Tumblr"
+              type="checkbox"
+              class="input-checkbox"
+            />Tumblr
+          </label>
+          <label
+            ><input
+              name="socialM"
+              value="Myspace"
+              type="checkbox"
+              class="input-checkbox"
+            />Myspace
+          </label>
+        </div>
+        <div id="form__section" style="margin-bottom: 40px;">
+          <p>What do you mainly use these social media apps for?</p>
+          <textarea
+          id="comments"
+          class="input-textarea"
+          name="comment"
+          placeholder="Enter your answer here..."
+        ></textarea>
+        </div>
+        <div id="form__section" style="margin-bottom: 0;">
+            <div id="buttonwrapper">
+            <button type="submit" id="submit" class="submit-button">submit</button>
+            </div>
+        </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

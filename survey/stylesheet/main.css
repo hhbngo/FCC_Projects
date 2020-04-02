@@ -1,0 +1,196 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* mobile friendly alternative to using background-attachment: fixed */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  background: url("/survey/assets/dole777-EQSPI11rf68-unsplash.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#container {
+  width: 100%;
+  height: 100%;
+}
+
+header {
+  text-align: center;
+  color: rgb(241, 241, 226);
+  margin: 30px;
+  margin-bottom: 15px;
+  margin-top: 26px;
+  text-shadow: 1px 1px black;
+}
+
+header h1 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 2.35rem;
+  line-height: 0.98em;
+}
+
+header p {
+  font-size: 1.05em;
+  word-spacing: 1px;
+  line-height: 1.3em;
+}
+
+#survey-form {
+  background: rgba(226, 225, 221, 0.411);
+  width: 100%;
+  border-radius: 10px;
+  padding: 42px;
+}
+
+label {
+  display: flex;
+  margin-bottom: 4px;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: bolder;
+  margin-left: 2px;
+}
+
+#form__section {
+  margin-bottom: 20px;
+}
+
+input {
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  padding: 6px;
+  padding-left: 10px;
+  font-family: inherit;
+  font-size: 0.98rem;
+  color: rgb(0, 0, 0);
+}
+
+#ssn-label {
+  font-size: 1.05rem;
+  font-weight: bolder;
+}
+
+.clue {
+  margin-left: 4px;
+}
+
+#dropdown {
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  padding: 6px;
+  padding-left: 10px;
+  font-family: inherit;
+  font-size: 0.98rem;
+  color: rgb(0, 0, 0);
+}
+
+#form__section p {
+  margin-bottom: 7px;
+  align-items: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-left: 2px;
+}
+
+.input-radio {
+  display: inline-block;
+  width: auto;
+  margin-right: 12px;
+}
+
+.radiowrapper {
+  margin-top: 10px;
+}
+
+input[type="radio"] {
+  height: 1.3em;
+  width: 1.3em;
+  border: 0px;
+}
+
+input[type="checkbox"] {
+  width: 1.5em;
+  height: 1.5em;
+  border: 0px;
+}
+
+.radiospacing label {
+  margin-bottom: 12px;
+}
+
+.checkspacing label {
+  margin-bottom: 12px;
+}
+
+.small {
+  font-size: 0.8em;
+}
+
+#form__section p {
+  font-weight: bolder;
+  font-size: 1.09em;
+}
+
+#ssn-label {
+  font-size: 1.15em;
+}
+
+textarea {
+  width: 100%;
+  height: 130px;
+  border: 0px;
+  border-radius: 5px;
+  font-family: inherit;
+  padding: 7px 0px 0px 10px;
+  font-size: 1.08em;
+  margin-top: 14px;
+}
+
+.submit-button {
+  width: 60%;
+  max-width: 236px;
+  padding: 10px;
+  font-family: inherit;
+  font-size: 1.3em;
+  margin-top: 10px;
+  margin: 0 auto;
+  background: #4386fc;
+  border: 0;
+  border-radius: 5px;
+  color: azure;
+}
+
+#buttonwrapper {
+  text-align: center;
+}
+
+.removebotmargin {
+  margin-bottom: 0px;
+}
+
+@media (min-width: 700px) {
+  #survey-form {
+    margin: 0 auto;
+    max-width: 700px;
+  }
+}

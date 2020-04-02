@@ -15,8 +15,6 @@ overflow: hidden;
 body {
   margin: 0;
   font-family: "Montserrat", sans-serif;
-  overflow-y: scroll;
-  -webkit-overflow-scrolling:touch;
 }
 
 /* mobile friendly alternative to using background-attachment: fixed */

@@ -117,6 +117,10 @@ input {
   margin-right: 12px;
 }
 
+.input-checkbox {
+  margin-right: 11px;
+}
+
 .radiowrapper {
   margin-top: 10px;
 }

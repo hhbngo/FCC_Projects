@@ -269,6 +269,11 @@ p {
   background-size: cover;
 }
 
+.pig {
+  background-image: url(https://raw.githubusercontent.com/hhbngo/FCC_Projects/master/FCCimages/dice.png);
+  background-size: cover;
+}
+
 .invisbox {
   height: 100%;
   width: 100%;

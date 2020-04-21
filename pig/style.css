@@ -27,6 +27,7 @@ body {
   position: relative;
   height: 100vh;
   color: #555;
+  background-repeat: no-repeat;
 }
 .winningInputWrapper {
   padding-top: 0px;

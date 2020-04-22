@@ -453,4 +453,8 @@ i {
   .wrapper {
     zoom: 0.32;
   }
+  .winBox input {
+    height: auto;
+    padding: 0;
+  }
 }

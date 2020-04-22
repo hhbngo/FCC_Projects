@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.5">
     <script
       src="https://kit.fontawesome.com/116c39369e.js"
       crossorigin="anonymous"
@@ -20,89 +21,17 @@
 
     <title>Pig Game</title>
   </head>
-
+    <div class="orientationCover">
+      <h1>Use Landscape Mode
+        <i class="fas fa-undo"></i>
+      </h1>
+    </div>
   <body>
-    <div class="transparentLayer"></div>
-    <div class="rulePage">
-      <div class="xbox" onclick="ruleBoxClick()">
-        <div id="bar1"></div>
-        <div id="bar2"></div>
-      </div>
-      <div class="ruleSetWrapper">
-        <h1><u>RULES OF THE GAME</u></h1>
-        <ul>
-          <li>The game has 2 players each taking turns.</li>
-          <li>
-            In each turn, a player rolls a dice as many times as he whishes.
-            Each result get added to his potential round points.
-          </li>
-          <li>
-            However, If a player ever rolls a 1, all of their potential round
-            points are lost and their turn ends.
-          </li>
-          <li>
-            The player can choose to hold their round points by pressing the
-            'Hold' button --All of their round points gets added to their total
-            score-- This ends their turn.
-          </li>
-          <li>
-            The first player to reach the set winning amount of points wins the
-            game.
-          </li>
-        </ul>
-        <h1><u>EXTRA RULES</u></h1>
-        <ul>
-          <li>
-            By pressing the cog you will find two addition conditions that you
-            can apply to the game.
-          </li>
-          <li>
-            1. Rolling two 6's will double the player's current total score.
-            This does not end their turn.
-          </li>
-          <li>
-            2. Rolling two 1's will remove ALL of the current player's score and
-            ends their turn.
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="winningInputWrapper">
-      <div class="settingsBox" onclick="settingsBoxClick()">
-        <i class="fas fa-cog"></i>
-      </div>
-      <div class="winningBox">
-        <div class="settingsMenu">
-          <h1>Extra Settings</h1>
-          <div class="checkBoxWrapper">
-            <input
-              type="checkbox"
-              id="checkbox1"
-              name="checkbox1"
-              class="customCheckbox"
-            />
-            <label for="checkbox1">Double 6's doubles points </label><br />
-            <input
-              type="checkbox"
-              id="checkbox2"
-              name="checkbox2"
-              class="customCheckbox"
-            />
-            <label for="checkbox2"> Double 1's removes ALL points </label><br />
-          </div>
-        </div>
-        <label for="winnigInput">Enter the winning value:</label>
-        <input type="number" id="winningInput" name="winnigInput" required />
-      </div>
-    </div>
-    <div class="rulesBox" onclick="ruleBoxClick()">
-      <h2>R</h2>
-      <h2>U</h2>
-      <h2>L</h2>
-      <h2>E</h2>
-      <h2>S</h2>
-    </div>
     <div class="wrapper clearfix">
+      <div class="winBox">
+      <label for="winnigInput">Winning value:</label>
+      <input type="number" id="winningInput" name="winnigInput" required />
+      </div>
       <div class="player-0-panel active">
         <div class="player-name" id="name-0">Player 1</div>
         <div class="player-score" id="score-0">43</div>

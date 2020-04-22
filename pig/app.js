@@ -8,7 +8,28 @@ GAME RULES:
 - The first player to reach 100 points on GLOBAL score wins the game
 
 */
-document.body.style.zoom = 0.9
+firstOrientationCheck();
+
+function firstOrientationCheck() {
+  if (window.innerHeight > window.innerWidth) {
+    //portrait mode:
+    document.querySelector(".orientationCover").style.display = "block";
+  } else {
+    ///horizontal mode:
+    document.querySelector(".orientationCover").style.display = "none";
+  }
+}
+
+window.addEventListener("orientationchange", checkOrientation);
+
+function checkOrientation() {
+  if (window.innerHeight < window.innerWidth) {
+    document.querySelector(".orientationCover").style.display = "block";
+  } else {
+    document.querySelector(".orientationCover").style.display = "none";
+  }
+}
+
 var scores, roundScore, activePlayer, dice, gamePlaying;
 
 resetGame();
@@ -24,31 +45,13 @@ document
       document.querySelector(".btn-roll").style.display = "none";
       document.querySelector(".btn-hold").style.display = "none";
       await rollDices();
-
       document.querySelector(".btn-roll").style.display = "block";
       document.querySelector(".btn-hold").style.display = "block";
       var dice1 = Math.floor(Math.random() * 6) + 1;
       var dice2 = Math.floor(Math.random() * 6) + 1;
       dice1DOM.src = "dice-" + dice1 + ".png";
       dice2DOM.src = "dice-" + dice2 + ".png";
-      var extraCondition1 = document.getElementById("checkbox1").checked;
-      var extraCondition2 = document.getElementById("checkbox2").checked;
-      if (extraCondition1 && dice1 + dice2 == 12) {
-        scores[activePlayer] += scores[activePlayer];
-        document.querySelector("#score-" + activePlayer).textContent =
-          scores[activePlayer];
-        roundScore += dice1 + dice2;
-        document.querySelector(
-          "#current-" + activePlayer
-        ).textContent = roundScore;
-      } else if (extraCondition2 && dice1 + dice2 == 2) {
-        scores[activePlayer] = 0;
-        document.querySelector("#score-" + activePlayer).textContent =
-          scores[activePlayer];
-        document.querySelector(".btn-hold").style.display = "none";
-        document.querySelector(".btn-roll").style.display = "none";
-        document.querySelector(".btn-pass").style.display = "block";
-      } else if (dice1 !== 1 && dice2 !== 1) {
+      if (dice1 !== 1 && dice2 !== 1) {
         //add score
         roundScore += dice1 + dice2;
         document.querySelector(
@@ -152,28 +155,6 @@ function resetGame() {
   document.querySelector(".btn-hold").style.display = "block";
   document.querySelector(".btn-pass").style.display = "none";
 }
-
-function ruleBoxClick() {
-  document.querySelector(".rulePage").classList.toggle("vis");
-  document.querySelector(".rulesBox").classList.toggle("stayPlace2");
-}
-
-function settingsBoxClick() {
-  document.querySelector(".settingsMenu").classList.toggle("slideIn");
-  document.querySelector(".settingsBox").classList.toggle("stayPlace");
-}
-
-document
-  .querySelector(".transparentLayer")
-  .addEventListener("click", function () {
-    document.querySelector(".settingsBox").classList.remove("stayPlace");
-    document.querySelector(".rulePage").classList.remove("vis");
-    document.querySelector(".rulesBox").classList.remove("stayPlace2");
-  });
-
-document.querySelector(".wrapper").addEventListener("click", function () {
-  closeAll();
-});
 
 function closeAll() {
   document.querySelector(".settingsMenu").classList.remove("slideIn");

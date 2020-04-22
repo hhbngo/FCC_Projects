@@ -6,6 +6,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 .clearfix::after {
@@ -15,16 +17,40 @@
 }
 
 body {
-  backgroud: rgb(226, 217, 217);
+  background: rgb(226, 217, 217);
   font-family: Lato;
   font-weight: 300;
   position: relative;
   height: 100vh;
   color: #555;
   overflow-y: hidden;
+  overflow-x: hidden;
 }
-.winningInputWrapper {
-  padding-top: 40px;
+
+.orientationCover {
+  position: fixed;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background-color: black;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.orientationCover h1 {
+  position: absolute;
+  color: white;
+  top: 20%;
+  left: 54%;
+  transform: translateX(-54%);
+}
+
+.orientationCover i {
+  color: white !important;
 }
 
 .transparentLayer {
@@ -34,8 +60,7 @@ body {
 
 .rulePage {
   position: absolute;
-  width: 90%;
-  height: 90%;
+  width: 100%;
   background: white;
   z-index: 10;
   display: none;
@@ -74,7 +99,7 @@ body {
 
 .ruleSetWrapper {
   margin: 40px 0px 0px 60px;
-  width: 1100px;
+  width: 90vw;
 }
 
 .ruleSetWrapper h1 {
@@ -105,7 +130,7 @@ body {
 }
 
 .settingsBox {
-  position: fixed;
+  position: absolute;
   background: #eb4d4d;
   padding: 10px 10px 9px 20px;
   cursor: pointer;
@@ -113,7 +138,6 @@ body {
   top: 70px;
   transform: translateX(-13px);
   transition: 0.4s;
-  z-index: 20;
 }
 
 .settingsBox:hover {
@@ -129,7 +153,7 @@ body {
 .rulesBox {
   position: absolute;
   background: #eb4d4d;
-  top: 150px;
+  bottom: 0;
   left: 0;
   color: white;
   padding-left: 14px; /* 6 px*/
@@ -207,19 +231,31 @@ body {
   transform: translateX(0px);
 }
 
-.winningInputWrapper label {
+.winBox {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 10px;
+}
+
+.winBox label {
   margin-bottom: 15px;
   font-size: 1.5rem;
   font-weight: bolder;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }
 
-.winningInputWrapper input {
+.winBox input {
   width: 200px;
   height: 3rem;
   margin: 0 auto;
   font-size: 2.5rem;
   text-align: center;
-  padding: 30px 0 30px;
+  padding: 10px 0px 12px 10px;
   border: 1.5px solid #eb4d4d;
   font-family: Lato;
 }
@@ -285,15 +321,6 @@ body {
   font-weight: 300;
 }
 
-.active .player-name::after {
-  content: "\2022";
-  font-size: 47px;
-  position: absolute;
-  color: #eb4d4d;
-  top: -7px;
-  right: 10px;
-}
-
 .player-current-box {
   background-color: #eb4d4d;
   color: #fff;
@@ -357,7 +384,7 @@ i {
 }
 
 .btn-new {
-  top: 45px;
+  bottom: 45px;
 }
 .btn-roll {
   top: 403px;
@@ -378,23 +405,19 @@ i {
 .dice1 {
   position: absolute;
   left: 50%;
-  top: 120px;
+  top: 140px;
   transform: translateX(-50%);
   height: 100px;
   box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.1);
-  border: 1.5px solid black;
-  border-top: 1.5px solid black;
 }
 
 .dice2 {
   position: absolute;
   left: 50%;
-  bottom: 270px;
+  bottom: 250px;
   transform: translateX(-50%);
   height: 100px;
   box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.1);
-  border: 1.5px solid black;
-  border-top: 1.5px solid black;
 }
 
 .winner {
@@ -403,4 +426,31 @@ i {
 .winner .player-name {
   font-weight: 300;
   color: #eb4d4d;
+}
+
+@media (max-width: 1496px) {
+  .wrapper {
+    zoom: 1;
+  }
+}
+
+@media (max-width: 1024px) {
+  .wrapper {
+    zoom: 0.6;
+  }
+}
+@media (max-width: 900px) {
+  .wrapper {
+    zoom: 0.4;
+  }
+}
+@media (max-width: 768px) {
+  .wrapper {
+    zoom: 0.38;
+  }
+}
+@media (max-width: 600px) {
+  .wrapper {
+    zoom: 0.32;
+  }
 }

@@ -335,11 +335,12 @@ body {
 }
 
 .todo__wrapper h4 {
-  width: 175px;
+  width: 185px;
   color: rgb(53, 198, 218);
   margin: 0 auto 30px;
   cursor: pointer;
   white-space: nowrap;
+  transition: 0.1s;
 }
 
 @media (min-width: 374px) {
@@ -495,6 +496,10 @@ body {
     cursor: pointer;
     color: rgb(48, 152, 212);
     transform: translateX(10px);
+    transition: 0.3s;
+  }
+  .todo__wrapper h4:hover {
+    transform: translateX(3px);
     transition: 0.3s;
   }
 }

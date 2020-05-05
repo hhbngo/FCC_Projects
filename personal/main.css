@@ -176,7 +176,7 @@ body {
 
 .todo__wrapper {
   width: 100%;
-  height: 100%;
+
   margin-top: 100px;
   text-align: left;
 }
@@ -325,7 +325,7 @@ body {
 
 .crossOut p {
   text-decoration: line-through;
-  text-decoration-color: rgb(123, 161, 196);
+  text-decoration-color: rgb(48, 152, 212);
 }
 
 .crossOut .fa-circle:before {

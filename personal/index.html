@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <script
+      src="https://kit.fontawesome.com/116c39369e.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <div class="nav__hamburger">
+      <div class="bar__wrapper">
+        <div class="bar--1 bar"></div>
+        <div class="bar--2 bar"></div>
+        <div class="bar--3 bar"></div>
+      </div>
+    </div>
+    <div class="hamLinks">
+      <ul>
+        <li><a href="#" onclick="UIcontroller.closeNavToDo()">To-do</a></li>
+        <li><a href="#" onclick="UIcontroller.closeNavBudget()">Budget</a></li>
+      </ul>
+    </div>
+    <div class="hamLinksBg"></div>
+    <div class="bgShade" onclick="removeNav()"></div>
+    <nav class="nav__main">
+      <div class="logo"><i class="fas fa-dice-d20"> Person(al)</i></div>
+    </nav>
+    <div class="main__wrapper">
+      <aside class="side__nav">
+        <i class="fas fa-tasks todo__button"> To-Dos</i>
+        <i class="fas fa-piggy-bank budget__button"> Budget</i>
+      </aside>
+      <div class="todo__wrapper">
+        <h1 class="todo__title">Todo List</h1>
+        <!--
+        <div class="textbox__wrapper">
+          <input type="text" id="todo__textbox" name="todo__textbox" maxlength="5"/>
+          <i class="far fa-check-circle textbox__submit" id ="submit_btn"></i>
+        </div>
+        -->
+        <div class="btn-newtask">
+          <i class="fas fa-plus-circle" aria-hidden="true"> </i>
+          <h2>Add New Task</h2>
+        </div>
+      </div>
+      <div class="budget__wrapper"></div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

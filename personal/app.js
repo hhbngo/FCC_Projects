@@ -74,7 +74,7 @@ var UIcontroller = (function () {
         textBoxHTMLDiv.className = "textbox__wrapper";
         textBoxHTMLDiv.id = "textboxID";
         textBoxHTMLDiv.innerHTML =
-          '<div class="textbox__wrapper"><input type="text" id="todo__textbox" name="todo__textbox"/><i class="far fa-check-circle"></i></div>';
+          '<div class="textbox__wrapper"><input type="text" id="todo__textbox" name="todo__textbox" autocomplete="off"/><i class="far fa-check-circle"></i></div>';
         document
           .querySelector(".todo__wrapper")
           .insertBefore(textBoxHTMLDiv, newTask);
@@ -85,9 +85,11 @@ var UIcontroller = (function () {
     },
     hideNewTaskBtn: function () {
       document.querySelector(".btn-newtask").style.opacity = "0";
+      document.querySelector(".delete__completed").style.opacity = "0";
     },
     showNewTaskBtn: function () {
       document.querySelector(".btn-newtask").style.opacity = "1";
+      document.querySelector(".delete__completed").style.opacity = "1";
     },
     getInput: function () {
       return {
@@ -155,6 +157,16 @@ var UIcontroller = (function () {
         '<div class="wrapcheck"><div class="checks"><i class= "far fa-circle"></i></div><p>' +
         newTask +
         '</p></div><i class="fas fa-pencil-alt"></i></i></i>';
+    },
+    deleteCompleted: function () {
+      var fields = document.querySelectorAll(".tasktext__wrapper");
+
+      [].forEach.call(fields, function (current) {
+        if (current.classList.contains("checked")) {
+          DATAcontroller.deleteTaskData(current.id);
+          current.remove();
+        }
+      });
     },
   };
 })();
@@ -311,6 +323,7 @@ var controller = (function (uiCtrl, dataCtrl) {
   };
   var checkedClick = function (event) {
     var check = event.target;
+
     var checkParent = event.target.parentNode.parentNode.parentNode;
     var taskList = dataCtrl.readTask();
     if (
@@ -340,6 +353,8 @@ var controller = (function (uiCtrl, dataCtrl) {
           event.target.parentNode.parentNode.parentNode.parentNode.id;
         uiCtrl.restoreTaskState(inputID);
       }
+    } else if (check.parentNode.classList.contains("delete__completed")) {
+      uiCtrl.deleteCompleted();
     }
   };
   var editClick = function (event) {

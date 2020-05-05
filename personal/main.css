@@ -222,16 +222,6 @@ body {
   margin-left: 10px;
 }
 
-.btn-newtask:hover i {
-  transform: translateX(-3px);
-  transition: 0.3s;
-}
-
-.btn-newtask:hover h2 {
-  transform: translateX(3px);
-  transition: 0.3s;
-}
-
 .textbox__wrapper {
   margin-bottom: 20px;
   text-align: center;
@@ -310,17 +300,6 @@ body {
 
 .checks {
   cursor: pointer;
-}
-
-.tasktext__wrapper i:hover {
-  color: rgb(95, 189, 218);
-
-  transition: 0.2s;
-}
-
-.checks:hover .fa-circle:before {
-  content: "\f058";
-  color: rgb(95, 189, 218);
 }
 
 .crossOut p {
@@ -421,12 +400,7 @@ body {
     margin-top: 40px;
     transition: 0.3s;
   }
-  .side__nav i:hover {
-    cursor: pointer;
-    color: rgb(48, 152, 212);
-    transform: translateX(10px);
-    transition: 0.3s;
-  }
+
   .nav__hamburger {
     display: none;
   }
@@ -483,5 +457,33 @@ body {
   }
   .logo {
     margin-left: 30px;
+  }
+}
+
+@media (hover: hover) {
+  .btn-newtask:hover i {
+    transform: translateX(-3px);
+    transition: 0.3s;
+  }
+
+  .btn-newtask:hover h2 {
+    transform: translateX(3px);
+    transition: 0.3s;
+  }
+  .tasktext__wrapper i:hover {
+    color: rgb(95, 189, 218);
+
+    transition: 0.2s;
+  }
+
+  .checks:hover .fa-circle:before {
+    content: "\f058";
+    color: rgb(95, 189, 218);
+  }
+  .side__nav i:hover {
+    cursor: pointer;
+    color: rgb(48, 152, 212);
+    transform: translateX(10px);
+    transition: 0.3s;
   }
 }

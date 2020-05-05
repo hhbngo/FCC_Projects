@@ -209,7 +209,7 @@ body {
   margin: 0 auto;
   cursor: pointer;
   margin-top: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   white-space: nowrap;
 }
 
@@ -332,6 +332,14 @@ body {
 
 .edit__textbox input:placeholder-shown {
   font-size: 1.3em;
+}
+
+.todo__wrapper h4 {
+  width: 167px;
+  color: rgb(53, 198, 218);
+  margin: 0 auto 30px;
+  cursor: pointer;
+  white-space: nowrap;
 }
 
 @media (min-width: 374px) {
@@ -457,6 +465,9 @@ body {
   }
   .logo {
     margin-left: 30px;
+  }
+  .delete__completed h4 {
+    margin: 0 0 20px 45px;
   }
 }
 

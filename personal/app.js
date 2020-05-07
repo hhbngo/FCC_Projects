@@ -286,6 +286,20 @@ var controller = (function (uiCtrl, dataCtrl) {
     document
       .querySelector(".todo__wrapper")
       .addEventListener("click", editClick);
+    document
+      .querySelector(".todo__wrapper")
+      .addEventListener("focusout", function () {
+        var element = document.getElementById("inputEdit");
+        var element2 = document.getElementById("todo__textbox");
+        if (element && element.value == "") {
+          var textboxID =
+            element.parentNode.parentNode.parentNode.parentNode.id;
+          uiCtrl.restoreTaskState(textboxID);
+        } else if (element2 && element2.value == "") {
+          uiCtrl.deleteTextBox();
+          uiCtrl.showNewTaskBtn();
+        }
+      });
   };
   var SubmitTodoEnterKey = function () {
     var input;

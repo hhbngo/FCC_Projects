@@ -381,7 +381,7 @@ var controller = (function (uiCtrl, dataCtrl) {
           .getElementById(editBtnID)
           .insertAdjacentHTML("beforeend", '<i class="fas fa-trash-alt"></i>');
         editBtn.previousSibling.innerHTML =
-          '<div class="wrapcheck"><div class="checks"><i class= "far fa-times-circle"></i></div><div class= "edit__textbox"><input type="text" id="inputEdit" autocomplete="off" placeholder="Press ESC to cancel..."></div>';
+          '<div class="wrapcheck"><div class="checks"><i class= "far fa-times-circle"></i></div><div class= "edit__textbox"><input type="text" id="inputEdit" autocomplete="off" placeholder="Esc to cancel..."></div>';
         document.getElementById("inputEdit").focus();
       } else {
         document.getElementById("inputEdit").focus();

@@ -478,6 +478,9 @@ body {
   .delete__completed h4 {
     margin: 0 0 20px 45px;
   }
+  .tasktext__wrapper .fa-save {
+    margin-right: 0px;
+  }
 }
 
 @media (hover: hover) {

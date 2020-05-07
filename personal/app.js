@@ -369,6 +369,7 @@ var controller = (function (uiCtrl, dataCtrl) {
       uiCtrl.swapEditButton(checkParent, taskList);
       document.getElementById(checkParent.id).classList.add("unchecked");
       document.getElementById(checkParent.id).classList.remove("checked");
+      uiCtrl.restoreTaskState(checkParent.id);
     } else if (check.classList.contains("fa-times-circle")) {
       if (document.getElementById("inputEdit")) {
         var inputID =

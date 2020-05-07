@@ -104,7 +104,7 @@ var UIcontroller = (function () {
       taskHtml.innerHTML =
         '<div class="wrapcheck"><div class="checks"><i class= "far fa-circle"></i></div><p>' +
         obj.task +
-        '</p></div><i class="fas fa-pencil-alt"></i></i></i>';
+        '</p></div><i class="fas fa-pencil-alt"></i><i class="fas fa-trash-alt"></i>';
       document
         .querySelector(".todo__wrapper")
         .insertBefore(taskHtml, document.querySelector(".btn-newtask"));
@@ -125,12 +125,12 @@ var UIcontroller = (function () {
         html.innerHTML =
           '<div class="wrapcheck"><div class="checks"><i class= "far fa-circle"></i></div><p>' +
           taskHtml +
-          '</p></div><i class="fas fa-trash-alt"></i></i></i>';
+          '</p></div><i class="fas fa-trash-alt"></i>';
       } else if (html.classList.contains("checked")) {
         html.innerHTML =
           '<div class="wrapcheck"><div class="checks"><i class= "far fa-circle"></i></div><p>' +
           taskHtml +
-          '</p></div><i class="fas fa-pencil-alt"></i></i></i>';
+          '</p></div><i class="fas fa-pencil-alt"></i>';
       }
     },
     deleteTaskUI: function (selectorID) {
@@ -149,22 +149,29 @@ var UIcontroller = (function () {
       document.getElementById(selectorID).innerHTML =
         '<div class="wrapcheck"><div class="checks"><i class= "far fa-circle"></i></div><p>' +
         task +
-        '</p></div><i class="fas fa-pencil-alt"></i></i></i>';
+        '</p></div><i class="fas fa-pencil-alt"></i><i class="fas fa-trash-alt"></i>';
     },
     saveInput: function (newTask, id) {
       document.getElementById(id).className = "tasktext__wrapper unchecked";
       document.getElementById(id).innerHTML =
         '<div class="wrapcheck"><div class="checks"><i class= "far fa-circle"></i></div><p>' +
         newTask +
-        '</p></div><i class="fas fa-pencil-alt"></i></i></i>';
+        '</p></div><i class="fas fa-pencil-alt"></i><i class="fas fa-trash-alt"></i>';
     },
     deleteCompleted: function () {
       var fields = document.querySelectorAll(".tasktext__wrapper");
 
       [].forEach.call(fields, function (current) {
         if (current.classList.contains("checked")) {
-          DATAcontroller.deleteTaskData(current.id);
-          current.remove();
+          current.classList.add("slideout");
+          document
+            .querySelector(".slideout")
+            .addEventListener("transitionend", function (event) {
+              if (event.propertyName == "opacity") {
+                DATAcontroller.deleteTaskData(current.id);
+                current.remove();
+              }
+            });
         }
       });
     },
@@ -286,6 +293,7 @@ var controller = (function (uiCtrl, dataCtrl) {
     document
       .querySelector(".todo__wrapper")
       .addEventListener("click", editClick);
+
     document
       .querySelector(".todo__wrapper")
       .addEventListener("focusout", function () {
@@ -379,7 +387,7 @@ var controller = (function (uiCtrl, dataCtrl) {
         editBtn.className = "far fa-save";
         document
           .getElementById(editBtnID)
-          .insertAdjacentHTML("beforeend", '<i class="fas fa-trash-alt"></i>');
+          .querySelector(".fa-trash-alt").style.display = "none";
         editBtn.previousSibling.innerHTML =
           '<div class="wrapcheck"><div class="checks"><i class= "far fa-times-circle"></i></div><div class= "edit__textbox"><input type="text" id="inputEdit" autocomplete="off" placeholder="Esc to cancel..."></div>';
         document.getElementById("inputEdit").focus();
@@ -400,8 +408,15 @@ var controller = (function (uiCtrl, dataCtrl) {
     var trashBtn = event.target;
     var trashBtnID = event.target.parentNode.id;
     if (trashBtn.classList.contains("fa-trash-alt")) {
-      dataCtrl.deleteTaskData(trashBtnID);
-      uiCtrl.deleteTaskUI(trashBtnID);
+      event.target.parentNode.classList.add("slideout");
+      document
+        .querySelector(".slideout")
+        .addEventListener("transitionend", function (event) {
+          if (event.propertyName == "opacity") {
+            dataCtrl.deleteTaskData(trashBtnID);
+            uiCtrl.deleteTaskUI(trashBtnID);
+          }
+        });
     }
   };
   return {

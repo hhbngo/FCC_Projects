@@ -332,10 +332,7 @@ body {
 
 .edit__textbox input::placeholder {
   color: rgb(209, 206, 206);
-}
-
-.edit__textbox input:placeholder-shown {
-  font-size: 1.3em;
+  font-size: 1em;
 }
 
 .todo__wrapper h4 {

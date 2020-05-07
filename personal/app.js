@@ -84,12 +84,12 @@ var UIcontroller = (function () {
       }
     },
     hideNewTaskBtn: function () {
-      document.querySelector(".btn-newtask").style.opacity = "0";
-      document.querySelector(".delete__completed").style.opacity = "0";
+      document.querySelector(".btn-newtask").style.display = "none";
+      document.querySelector(".delete__completed").style.display = "none";
     },
     showNewTaskBtn: function () {
-      document.querySelector(".btn-newtask").style.opacity = "1";
-      document.querySelector(".delete__completed").style.opacity = "1";
+      document.querySelector(".btn-newtask").style.display = "flex";
+      document.querySelector(".delete__completed").style.display = "block";
     },
     getInput: function () {
       return {

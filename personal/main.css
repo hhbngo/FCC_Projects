@@ -366,7 +366,7 @@ body {
   margin-top: 23px;
   font-size: 3em;
   color: black;
-
+  letter-spacing: 3px;
 }
 
 .input__area {
@@ -741,6 +741,12 @@ body {
   .inc__list,
   .dec__list {
     margin-top: 0px;
+  }
+  .header__wrapper h2 {
+    font-size: 1.6em;
+  }
+  .header__wrapper h1 {
+    font-size: 3.6em;
   }
 }
 

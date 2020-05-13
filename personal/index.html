@@ -50,7 +50,51 @@
           <h4>Delete all completed</h4>
         </div>
       </div>
-      <div class="budget__wrapper"></div>
+      <div class="budget__MOBILE">
+        <div class="budget__wrapper">
+          <div class="header__wrapper">
+            <h2 class="date__label">Available Budget in November :</h2>
+            <h1 class="totalBudget"></h1>
+          </div>
+          <div class="input__area">
+            <div class="increments">
+              <i class="fas fa-plus-square"></i>
+              <i class="fas fa-minus-square"></i>
+            </div>
+            <input
+              type="number"
+              name="moneyinput"
+              id="moneyinput"
+              placeholder="$0"
+            />
+            <i class="fas fa-check-square"></i>
+          </div>
+          <div class="input__area-2">
+            <input
+              type="text"
+              name="descriptioninput"
+              id="descriptioninput"
+              placeholder="Add Description"
+            />
+            <i class="far fa-check-circle textbox__submit" id="submit_btn"></i>
+          </div>
+
+          <div class="bg">
+            <div class="inc__btn"><p>Income</p></div>
+            <div class="dec__btn"><p>Expenses</p></div>
+          </div>
+          <div class="incdec__wrapper">
+            <div class="inc__wrapper">
+              <h1 class="totalInc"></h1>
+              <div class="inc__list"></div>
+            </div>
+            <div class="dec__wrapper">
+              <h1 class="totalDec"></h1>
+              <div class="dec__list"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <script src="app.js"></script>
   </body>

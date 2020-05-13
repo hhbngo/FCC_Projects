@@ -34,6 +34,9 @@ var showBudgetApp = function () {
   document
     .querySelector(".budget__button")
     .classList.add("budget__button--active");
+  document.querySelector(".fa-plus-square").classList.add("inc--active");
+  document.querySelector(".fa-minus-square").classList.remove("dec--active");
+  incrementValue = "inc";
 };
 
 var mql = window.matchMedia("(min-width: 786px)");
@@ -52,6 +55,23 @@ var UIcontroller = (function () {
     bar1: ".bar--1",
     bar2: ".bar--2",
     bar3: ".bar--3",
+  };
+
+  var formatNumber = function (num, type) {
+    var numSplit, int, dec, type;
+    num = Math.abs(num);
+    num = num.toFixed(2);
+
+    numSplit = num.split(".");
+    int = numSplit[0];
+
+    if (int.length > 3) {
+      int = int.substr(0, int.length - 3) + "," + int.substr(int.length - 3, 3);
+    }
+
+    dec = numSplit[1];
+
+    return (type === "dec" ? "- " : "+ ") + " " + "$" + int + "." + dec;
   };
 
   return {
@@ -175,6 +195,54 @@ var UIcontroller = (function () {
         }
       });
     },
+    clearFields: function () {
+      document.getElementById("moneyinput").value = "";
+      document.getElementById("descriptioninput").value = "";
+      document.getElementById("moneyinput").focus();
+    },
+    displayBudget: function () {},
+    updateBudgetUI: function (obj) {
+      if (obj.budget > 0) {
+        document.querySelector(".totalBudget").textContent = formatNumber(
+          obj.budget,
+          "inc"
+        );
+      } else if (obj.budget == 0) {
+        document.querySelector(".totalBudget").textContent = "$ 0.00";
+      } else {
+        document.querySelector(".totalBudget").textContent = formatNumber(
+          obj.budget,
+          "dec"
+        );
+      }
+      document.querySelector(".totalInc").textContent = formatNumber(
+        obj.totals.inc,
+        "inc"
+      );
+      document.querySelector(".totalDec").textContent = formatNumber(
+        obj.totals.dec,
+        "dec"
+      );
+    },
+    addNewItem: function (obj) {
+      var e = document.querySelector("." + obj.type + "__list");
+      var n =
+        '<div class="bordershadow" id="' +
+        obj.type +
+        "-" +
+        obj.id +
+        '"><h2>' +
+        obj.descrition +
+        "</h2><p>" +
+        formatNumber(obj.amount, obj.type) +
+        '</p><i class="far fa-times-circle"></i></div>';
+      e.insertAdjacentHTML("beforeend", n);
+    },
+    deleteItem: function (selectorID, field) {
+      list = document.querySelector(field);
+      node = document.getElementById(selectorID);
+      list.removeChild(node);
+    },
   };
 })();
 
@@ -184,7 +252,30 @@ var DATAcontroller = (function () {
     (this.id = id), (this.task = task);
   };
 
+  var Income = function (id, type, descrition, amount) {
+    (this.id = id),
+      (this.type = type),
+      (this.descrition = descrition),
+      (this.amount = amount);
+  };
+
+  var Expense = function (id, type, descrition, amount) {
+    (this.id = id),
+      (this.type = type),
+      (this.descrition = descrition),
+      (this.amount = amount);
+  };
+
   var taskList = [];
+  var budgetList = {
+    inc: [],
+    dec: [],
+    totals: {
+      inc: 0,
+      dec: 0,
+    },
+    budget: 0,
+  };
 
   return {
     pushInput: function (input) {
@@ -200,8 +291,30 @@ var DATAcontroller = (function () {
       taskList.push(newItem);
       return newItem;
     },
+    inputGetBudget: function () {
+      var newItem, ID;
+      var type = incrementValue;
+      var desc = document.getElementById("descriptioninput").value;
+      var amount = parseFloat(document.getElementById("moneyinput").value);
+      if (budgetList[type].length > 0) {
+        ID = budgetList[type][budgetList[type].length - 1].id + 1;
+      } else {
+        ID = 0;
+      }
+
+      if (type === "inc") {
+        newItem = new Income(ID, type, desc, amount);
+      } else if (type === "dec") {
+        newItem = new Expense(ID, type, desc, amount);
+      }
+      budgetList[type].push(newItem);
+      return newItem;
+    },
     testing: function () {
       console.log(taskList);
+    },
+    testing2: function () {
+      console.log(budgetList);
     },
     readTask: function () {
       return taskList;
@@ -217,6 +330,26 @@ var DATAcontroller = (function () {
       for (let i = 0; i < taskList.length; i++) {
         if (taskList[i].id == ID) {
           taskList[i].task = newTask;
+        }
+      }
+    },
+    updateData: function (type) {
+      var sum = 0;
+      budgetList[type].forEach(function (cur) {
+        sum += cur.amount;
+      });
+      budgetList.totals[type] = sum;
+      budgetList.budget = budgetList.totals.inc - budgetList.totals.dec;
+      //console.log(budgetList);
+    },
+    getBudgetData: function () {
+      return budgetList;
+    },
+    deleteBudgetItem: function (selectorID, type) {
+      var numID = selectorID.split("-");
+      for (let i = 0; i < budgetList[type].length; i++) {
+        if (budgetList[type][i].id == numID[1]) {
+          budgetList[type].splice(i, 1);
         }
       }
     },
@@ -261,9 +394,25 @@ var controller = (function (uiCtrl, dataCtrl) {
             uiCtrl.saveInput(editedTask, elID);
             dataCtrl.editInputArray(editedTask, elID);
           }
+        } else if (
+          document.getElementById("moneyinput") &&
+          document.getElementById("moneyinput").value !== "" &&
+          !isNaN(document.getElementById("moneyinput").value) &&
+          document.getElementById("moneyinput").value > 0
+        ) {
+          document.querySelector(".input__area").style.display = "none";
+          document.querySelector(".input__area-2").style.display = "flex";
+          submitBudget();
+          document.getElementById("descriptioninput").focus();
+        } else if (
+          document.getElementById("descriptioninput") &&
+          document.getElementById("descriptioninput").value !== ""
+        ) {
+          document.querySelector(".input__area").style.display = "flex";
+          document.querySelector(".input__area-2").style.display = "none";
+          document.getElementById("moneyinput").focus();
         }
-      }
-      /*var key = e.keyCode;
+        /*var key = e.keyCode;
       switch (key) {
         case 13:
           if (document.getElementById("textboxID")) {
@@ -273,6 +422,7 @@ var controller = (function (uiCtrl, dataCtrl) {
           }
           break;
       }*/
+      }
     });
     document.onkeydown = function (evt) {
       evt = evt || window.event;
@@ -308,6 +458,59 @@ var controller = (function (uiCtrl, dataCtrl) {
           uiCtrl.showNewTaskBtn();
         }
       });
+    document
+      .querySelector(".budget__MOBILE")
+      .addEventListener("click", mobileClick);
+    document
+      .querySelector(".inc__btn")
+      .addEventListener("click", function (event) {
+        if (!event.target.parentNode.classList.contains("inc__btn--active")) {
+          document
+            .querySelector(".inc__btn")
+            .classList.toggle("inc__btn--active");
+          document
+            .querySelector(".dec__btn")
+            .classList.toggle("dec__btn--active");
+          document.querySelector(".inc__wrapper").style.display = "block";
+          document.querySelector(".dec__wrapper").style.display = "none";
+        }
+      });
+    document
+      .querySelector(".dec__btn")
+      .addEventListener("click", function (event) {
+        if (!event.target.parentNode.classList.contains("dec__btn--active")) {
+          document
+            .querySelector(".inc__btn")
+            .classList.toggle("inc__btn--active");
+          document
+            .querySelector(".dec__btn")
+            .classList.toggle("dec__btn--active");
+          document.querySelector(".inc__wrapper").style.display = "none";
+          document.querySelector(".dec__wrapper").style.display = "block";
+        }
+      });
+    document
+      .querySelector(".inc__wrapper")
+      .addEventListener("click", deleteClickInc);
+    document
+      .querySelector(".dec__wrapper")
+      .addEventListener("click", deleteClickDec);
+  };
+  var deleteClickInc = function (event) {
+    if (event.target.classList.contains("fa-times-circle")) {
+      dataCtrl.deleteBudgetItem(event.target.parentNode.id, "inc");
+      uiCtrl.deleteItem(event.target.parentNode.id, ".inc__list");
+      dataCtrl.updateData("inc");
+      uiCtrl.updateBudgetUI(dataCtrl.getBudgetData());
+    }
+  };
+  var deleteClickDec = function (event) {
+    if (event.target.classList.contains("fa-times-circle")) {
+      dataCtrl.deleteBudgetItem(event.target.parentNode.id, "dec");
+      uiCtrl.deleteItem(event.target.parentNode.id, ".dec__list");
+      dataCtrl.updateData("dec");
+      uiCtrl.updateBudgetUI(dataCtrl.getBudgetData());
+    }
   };
   var SubmitTodoEnterKey = function () {
     var input;
@@ -420,13 +623,58 @@ var controller = (function (uiCtrl, dataCtrl) {
         });
     }
   };
+  var mobileClick = function (event) {
+    var clickTarget = event.target;
+    if (clickTarget.classList.contains("fa-plus-square")) {
+      incrementValue = "inc";
+      document.querySelector(".fa-plus-square").classList.add("inc--active");
+      document
+        .querySelector(".fa-minus-square")
+        .classList.remove("dec--active");
+    } else if (clickTarget.classList.contains("fa-minus-square")) {
+      incrementValue = "dec";
+      document.querySelector(".fa-plus-square").classList.remove("inc--active");
+      document.querySelector(".fa-minus-square").classList.add("dec--active");
+    } else if (
+      clickTarget.classList.contains("fa-check-square") &&
+      document.getElementById("moneyinput").value !== "" &&
+      !isNaN(document.getElementById("moneyinput").value) &&
+      document.getElementById("moneyinput").value > 0
+    ) {
+      document.querySelector(".input__area").style.display = "none";
+      document.querySelector(".input__area-2").style.display = "flex";
+      submitBudget();
+      document.getElementById("descriptioninput").focus();
+    } else if (
+      clickTarget.classList.contains("fa-check-circle") &&
+      document.getElementById("descriptioninput").value !== ""
+    ) {
+      document.querySelector(".input__area").style.display = "flex";
+      document.querySelector(".input__area-2").style.display = "none";
+      document.getElementById("moneyinput").focus();
+    }
+  };
+  var submitBudget = function () {
+    var item = dataCtrl.inputGetBudget();
+    uiCtrl.clearFields();
+    dataCtrl.updateData(item.type);
+    uiCtrl.updateBudgetUI(dataCtrl.getBudgetData());
+    uiCtrl.addNewItem(item);
+  };
+
   return {
     init: function () {
       console.log("Application has started.");
       setupEventListeners();
-      showTodoApp();
+      showBudgetApp();
+      document.querySelector(".inc__btn").classList.toggle("inc__btn--active");
+      document.querySelector(".inc__wrapper").style.display = "block";
+      document.querySelector(".dec__wrapper").style.display = "none";
+      uiCtrl.updateBudgetUI(dataCtrl.getBudgetData());
     },
   };
 })(UIcontroller, DATAcontroller);
 
+var temp = "";
+var incrementValue = "inc";
 controller.init();

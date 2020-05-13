@@ -666,7 +666,7 @@ var controller = (function (uiCtrl, dataCtrl) {
     init: function () {
       console.log("Application has started.");
       setupEventListeners();
-      showBudgetApp();
+      showTodoApp();
       document.querySelector(".inc__btn").classList.toggle("inc__btn--active");
       document.querySelector(".inc__wrapper").style.display = "block";
       document.querySelector(".dec__wrapper").style.display = "none";

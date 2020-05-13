@@ -71,7 +71,7 @@ var UIcontroller = (function () {
 
     dec = numSplit[1];
 
-    return (type === "dec" ? "- " : "+ ") + " " + "$" + int + "." + dec;
+    return (type === "dec" ? "-" : "+") + " " + "$" + int + "." + dec;
   };
 
   return {

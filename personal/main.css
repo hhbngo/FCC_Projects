@@ -555,6 +555,10 @@ body {
   margin-left: 10px;
 }
 
+.red {
+  color: red !important;
+}
+  
 @media (min-width: 374px) {
   .tasktext__wrapper p {
     font-size: 1.4em;
@@ -722,10 +726,10 @@ body {
     font-size: 2em;
     text-align: left;
     margin-left: 10px;
-    border: 2px solid black;
+    
     width: max-content;
     padding: 10px;
-    background: white;
+    
   }
   .input__area input {
     width: 400px;

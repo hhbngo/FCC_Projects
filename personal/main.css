@@ -556,7 +556,11 @@ body {
 }
 
 .red {
-  color: red !important;
+  color: rgb(236, 82, 82) !important;
+}
+
+.green {
+  color: rgb(77, 204, 172) !important;
 }
   
 @media (min-width: 374px) {

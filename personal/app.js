@@ -635,6 +635,7 @@ var controller = (function (uiCtrl, dataCtrl) {
       incrementValue = "dec";
       document.querySelector(".fa-plus-square").classList.remove("inc--active");
       document.querySelector(".fa-minus-square").classList.add("dec--active");
+      document.querySelector(".fa-check-square").classList.toggle("red");
     } else if (
       clickTarget.classList.contains("fa-check-square") &&
       document.getElementById("moneyinput").value !== "" &&

@@ -635,6 +635,8 @@ var controller = (function (uiCtrl, dataCtrl) {
         .classList.remove("dec--active");
       document.querySelector(".fa-check-square").classList.add("green");
       document.querySelector(".fa-check-square").classList.remove("red");
+      document.querySelector(".inc__btn).classList.add("inc__btn--active");
+      document.querySelector(".dec__btn).classList.remove("dec__btn--active");     
       document.querySelector(".inc__wrapper").style.display = "block";
       document.querySelector(".dec__wrapper").style.display = "none";
     } else if (clickTarget.classList.contains("fa-minus-square")) {
@@ -643,6 +645,8 @@ var controller = (function (uiCtrl, dataCtrl) {
       document.querySelector(".fa-minus-square").classList.add("dec--active");
       document.querySelector(".fa-check-square").classList.remove("green");
       document.querySelector(".fa-check-square").classList.add("red");
+      document.querySelector(".inc__btn).classList.remove("inc__btn--active");
+      document.querySelector(".dec__btn).classList.add("dec__btn--active");   
       document.querySelector(".inc__wrapper").style.display = "none";
       document.querySelector(".dec__wrapper").style.display = "block";
     } else if (

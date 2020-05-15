@@ -447,7 +447,7 @@ body {
 }
 
 .input__area-2 i:hover {
-  color: rgb(95, 189, 218);
+  
   transform: translateX(2px);
   transition: 0.3s;
 }

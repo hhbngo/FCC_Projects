@@ -36,6 +36,8 @@ var showBudgetApp = function () {
     .classList.add("budget__button--active");
   document.querySelector(".fa-plus-square").classList.add("inc--active");
   document.querySelector(".fa-minus-square").classList.remove("dec--active");
+  document.querySelector(".fa-check-square").classList.add("green");
+  document.querySelector(".fa-check-square").classList.remove("red");
   incrementValue = "inc";
 };
 
@@ -631,11 +633,18 @@ var controller = (function (uiCtrl, dataCtrl) {
       document
         .querySelector(".fa-minus-square")
         .classList.remove("dec--active");
+      document.querySelector(".fa-check-square").classList.add("green");
+      document.querySelector(".fa-check-square").classList.remove("red");
+      document.querySelector(".inc__wrapper").style.display = "block";
+      document.querySelector(".dec__wrapper").style.display = "none";
     } else if (clickTarget.classList.contains("fa-minus-square")) {
       incrementValue = "dec";
       document.querySelector(".fa-plus-square").classList.remove("inc--active");
       document.querySelector(".fa-minus-square").classList.add("dec--active");
-      document.querySelector(".fa-check-square").classList.toggle("red");
+      document.querySelector(".fa-check-square").classList.remove("green");
+      document.querySelector(".fa-check-square").classList.add("red");
+      document.querySelector(".inc__wrapper").style.display = "none";
+      document.querySelector(".dec__wrapper").style.display = "block";
     } else if (
       clickTarget.classList.contains("fa-check-square") &&
       document.getElementById("moneyinput").value !== "" &&

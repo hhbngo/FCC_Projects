@@ -39,7 +39,7 @@ var showBudgetApp = function () {
   document.querySelector(".fa-check-square").classList.add("green");
   document.querySelector(".fa-check-square").classList.remove("red");
   document.querySelector(".inc__btn").classList.add("inc__btn--active");
-  document.querySelector(".dec__btn").classList.remove("dec__btn--active");     
+  document.querySelector(".dec__btn").classList.remove("dec__btn--active");
   document.querySelector(".inc__wrapper").style.display = "block";
   document.querySelector(".dec__wrapper").style.display = "none";
   incrementValue = "inc";
@@ -206,7 +206,7 @@ var UIcontroller = (function () {
       document.getElementById("descriptioninput").value = "";
       document.getElementById("moneyinput").focus();
     },
-    displayBudget: function () {},
+    displayBudget: function () { },
     updateBudgetUI: function (obj) {
       if (obj.budget > 0) {
         document.querySelector(".totalBudget").textContent = formatNumber(
@@ -283,6 +283,14 @@ var DATAcontroller = (function () {
     budget: 0,
   };
 
+  var persistTaskData = function () {
+    localStorage.setItem('tasks', JSON.stringify(taskList));
+  };
+
+  var persistBudgetData = function (type) {
+    localStorage.setItem(`${type}`, JSON.stringify(budgetList[type]));
+  };
+
   return {
     pushInput: function (input) {
       var newItem, ID;
@@ -295,6 +303,7 @@ var DATAcontroller = (function () {
 
       newItem = new Task(ID, input);
       taskList.push(newItem);
+      persistTaskData();
       return newItem;
     },
     inputGetBudget: function () {
@@ -314,6 +323,7 @@ var DATAcontroller = (function () {
         newItem = new Expense(ID, type, desc, amount);
       }
       budgetList[type].push(newItem);
+      persistBudgetData(type);
       return newItem;
     },
     testing: function () {
@@ -325,10 +335,17 @@ var DATAcontroller = (function () {
     readTask: function () {
       return taskList;
     },
+    readBudgetInc: function () {
+      return budgetList.inc;
+    },
+    readBudgetDec: function () {
+      return budgetList.dec;
+    },
     deleteTaskData: function (taskID) {
       for (let i = 0; i < taskList.length; i++) {
         if (taskList[i].id == taskID) {
           taskList.splice(i, 1);
+          persistTaskData();
         }
       }
     },
@@ -336,6 +353,7 @@ var DATAcontroller = (function () {
       for (let i = 0; i < taskList.length; i++) {
         if (taskList[i].id == ID) {
           taskList[i].task = newTask;
+          persistTaskData();
         }
       }
     },
@@ -356,10 +374,25 @@ var DATAcontroller = (function () {
       for (let i = 0; i < budgetList[type].length; i++) {
         if (budgetList[type][i].id == numID[1]) {
           budgetList[type].splice(i, 1);
+          persistBudgetData(type);
         }
       }
     },
+    readTaskStorage: function () {
+      const storage = JSON.parse(localStorage.getItem('tasks'));
+      if (storage) taskList = storage;
+    },
+
+    readBudgetStorage: function () {
+      const inc = JSON.parse(localStorage.getItem('inc'));
+      const dec = JSON.parse(localStorage.getItem('dec'));
+      if (inc) budgetList.inc = inc;
+      if (dec) budgetList.dec = dec;
+    }
   };
+
+
+
 })();
 
 //GLOBAL CONTROLLER
@@ -640,7 +673,7 @@ var controller = (function (uiCtrl, dataCtrl) {
       document.querySelector(".fa-check-square").classList.add("green");
       document.querySelector(".fa-check-square").classList.remove("red");
       document.querySelector(".inc__btn").classList.add("inc__btn--active");
-      document.querySelector(".dec__btn").classList.remove("dec__btn--active");     
+      document.querySelector(".dec__btn").classList.remove("dec__btn--active");
       document.querySelector(".inc__wrapper").style.display = "block";
       document.querySelector(".dec__wrapper").style.display = "none";
       document.getElementById("moneyinput").focus();
@@ -651,7 +684,7 @@ var controller = (function (uiCtrl, dataCtrl) {
       document.querySelector(".fa-check-square").classList.remove("green");
       document.querySelector(".fa-check-square").classList.add("red");
       document.querySelector(".inc__btn").classList.remove("inc__btn--active");
-      document.querySelector(".dec__btn").classList.add("dec__btn--active");   
+      document.querySelector(".dec__btn").classList.add("dec__btn--active");
       document.querySelector(".inc__wrapper").style.display = "none";
       document.querySelector(".dec__wrapper").style.display = "block";
       document.getElementById("moneyinput").focus();
@@ -690,6 +723,13 @@ var controller = (function (uiCtrl, dataCtrl) {
       document.querySelector(".inc__btn").classList.toggle("inc__btn--active");
       document.querySelector(".inc__wrapper").style.display = "block";
       document.querySelector(".dec__wrapper").style.display = "none";
+      dataCtrl.readTaskStorage();
+      dataCtrl.readTask().forEach(task => uiCtrl.addTaskItem(task));
+      dataCtrl.readBudgetStorage();
+      dataCtrl.readBudgetInc().forEach(inc => uiCtrl.addNewItem(inc));
+      dataCtrl.readBudgetDec().forEach(dec => uiCtrl.addNewItem(dec));
+      dataCtrl.updateData('inc');
+      dataCtrl.updateData('dec');
       uiCtrl.updateBudgetUI(dataCtrl.getBudgetData());
     },
   };

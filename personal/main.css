@@ -707,18 +707,6 @@ body {
   body {
     overflow-x: hidden;
   }
-
-  .bordershadow {
-    width: 97.1%;
-    font-size: 1.2em;
-    border-radius: 0px;
-    margin-bottom: 0px;
-    border-top: 1px solid gray;
-    border-bottom: 1px solid gray;
-  }
-  .bordershadow:nth-child(even) {
-    background: #f0eded;
-  }
   .bg .inc__btn,
   .bg .dec__btn {
     background: transparent;

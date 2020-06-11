@@ -66,7 +66,10 @@ var UIcontroller = (function () {
   var formatNumber = function (num, type) {
     return (type === "inc" ? "+ " : "") + num.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
   };
-
+  
+  var formatNumber2 = function (num, type) {
+    return (type === "inc" ? "+ " : "- ") + num.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+  };
 
   return {
     getDOMstrings: function () {
@@ -228,7 +231,7 @@ var UIcontroller = (function () {
         '"><h2>' +
         obj.descrition +
         "</h2><p>" +
-        formatNumber(obj.amount, obj.type) +
+        formatNumber2(obj.amount, obj.type) +
         '</p><i class="far fa-times-circle"></i></div>';
       e.insertAdjacentHTML("beforeend", n);
     },

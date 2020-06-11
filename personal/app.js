@@ -64,7 +64,7 @@ var UIcontroller = (function () {
   };
   
   var formatNumber = function (num, type) {
-    return (type === "dec" ? "- " : "+ ") + num.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    return (type === "inc" ? "+ ") + num.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
   };
 
 

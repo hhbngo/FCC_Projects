@@ -1,59 +1,4 @@
-var toggleNav = function () {
-  document.querySelector(".bar--1").classList.toggle("bar1Active");
-  document.querySelector(".bar--2").classList.toggle("bar2Active");
-  document.querySelector(".bar--3").classList.toggle("bar3Active");
-  document.querySelector(".hamLinks").classList.toggle("displayBlock");
-  document.querySelector(".hamLinksBg").classList.toggle("hamLinksBgActive");
-  document.querySelector(".bgShade").classList.toggle("bgShadeActive");
-};
 
-var removeNav = function () {
-  document.querySelector(".bar--1").classList.remove("bar1Active");
-  document.querySelector(".bar--2").classList.remove("bar2Active");
-  document.querySelector(".bar--3").classList.remove("bar3Active");
-  document.querySelector(".hamLinks").classList.remove("displayBlock");
-  document.querySelector(".hamLinksBg").classList.remove("hamLinksBgActive");
-  document.querySelector(".bgShade").classList.remove("bgShadeActive");
-};
-
-var showTodoApp = function () {
-  document.querySelector(".todo__wrapper").style.display = "block";
-  document.querySelector(".budget__wrapper").style.display = "none";
-  document.querySelector(".todo__button").classList.add("todo__button--active");
-  document
-    .querySelector(".budget__button")
-    .classList.remove("budget__button--active");
-};
-
-var showBudgetApp = function () {
-  document.querySelector(".todo__wrapper").style.display = "none";
-  document.querySelector(".budget__wrapper").style.display = "block";
-  document
-    .querySelector(".todo__button")
-    .classList.remove("todo__button--active");
-  document
-    .querySelector(".budget__button")
-    .classList.add("budget__button--active");
-  document.querySelector(".fa-plus-square").classList.add("inc--active");
-  document.querySelector(".fa-minus-square").classList.remove("dec--active");
-  document.querySelector(".fa-check-square").classList.add("green");
-  document.querySelector(".fa-check-square").classList.remove("red");
-  document.querySelector(".inc__btn").classList.add("inc__btn--active");
-  document.querySelector(".dec__btn").classList.remove("dec__btn--active");
-  document.querySelector(".inc__wrapper").style.display = "block";
-  document.querySelector(".dec__wrapper").style.display = "none";
-  incrementValue = "inc";
-};
-
-var mql = window.matchMedia("(min-width: 786px)");
-
-function screenTest(e) {
-  if (e.matches) {
-    removeNav();
-  }
-}
-
-mql.addListener(screenTest);
 
 //UI CONTROLLER
 var UIcontroller = (function () {
@@ -62,11 +7,11 @@ var UIcontroller = (function () {
     bar2: ".bar--2",
     bar3: ".bar--3",
   };
-  
+
   var formatNumber = function (num, type) {
     return (type === "inc" ? "+ " : "") + num.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
   };
-  
+
   var formatNumber2 = function (num, type) {
     return (type === "inc" ? "+ " : "- ") + num.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
   };
@@ -240,6 +185,16 @@ var UIcontroller = (function () {
       node = document.getElementById(selectorID);
       list.removeChild(node);
     },
+
+    completeCheck: function () {
+      let list = document.querySelectorAll('.checked');
+
+      if (list.length == 0) {
+        document.querySelector('.delete__completed').innerHTML = "";
+      } else if (list.length > 0) {
+        document.querySelector('.delete__completed').innerHTML = `<h4>Delete all completed (${list.length})<h4>`;
+      }
+    }
   };
 })();
 
@@ -525,7 +480,10 @@ var controller = (function (uiCtrl, dataCtrl) {
     document
       .querySelector(".dec__wrapper")
       .addEventListener("click", deleteClickDec);
+
+    mql.addListener(screenTest);
   };
+
   var deleteClickInc = function (event) {
     if (event.target.classList.contains("fa-times-circle")) {
       dataCtrl.deleteBudgetItem(event.target.parentNode.id, "inc");
@@ -573,9 +531,6 @@ var controller = (function (uiCtrl, dataCtrl) {
       }
     }
   };
-  var submitEditEnterKey = function () {
-    // stuff
-  };
   var checkedClick = function (event) {
     var check = event.target;
 
@@ -592,6 +547,7 @@ var controller = (function (uiCtrl, dataCtrl) {
       uiCtrl.swapEditButton(checkParent, taskList);
       document.getElementById(checkParent.id).classList.add("checked");
       document.getElementById(checkParent.id).classList.remove("unchecked");
+      uiCtrl.completeCheck();
     } else if (
       check.classList.contains("fa-circle") &&
       checkParent.classList.contains("checked")
@@ -603,6 +559,7 @@ var controller = (function (uiCtrl, dataCtrl) {
       document.getElementById(checkParent.id).classList.add("unchecked");
       document.getElementById(checkParent.id).classList.remove("checked");
       uiCtrl.restoreTaskState(checkParent.id);
+      uiCtrl.completeCheck();
     } else if (check.classList.contains("fa-times-circle")) {
       if (document.getElementById("inputEdit")) {
         var inputID =
@@ -611,6 +568,13 @@ var controller = (function (uiCtrl, dataCtrl) {
       }
     } else if (check.parentNode.classList.contains("delete__completed")) {
       uiCtrl.deleteCompleted();
+      document
+        .querySelector(".slideout")
+        .addEventListener("transitionend", function (event) {
+          if (event.propertyName == "opacity") {
+            document.querySelector('.delete__completed').innerHTML = "";
+          }
+        });
     }
   };
   var editClick = function (event) {
@@ -697,6 +661,7 @@ var controller = (function (uiCtrl, dataCtrl) {
       document.querySelector(".input__area-2").style.display = "none";
       document.getElementById("moneyinput").focus();
     }
+
   };
   var submitBudget = function () {
     var item = dataCtrl.inputGetBudget();
@@ -722,9 +687,67 @@ var controller = (function (uiCtrl, dataCtrl) {
       dataCtrl.updateData('inc');
       dataCtrl.updateData('dec');
       uiCtrl.updateBudgetUI(dataCtrl.getBudgetData());
+      uiCtrl.completeCheck();
     },
   };
 })(UIcontroller, DATAcontroller);
+
+var toggleNav = function () {
+  document.querySelector(".bar--1").classList.toggle("bar1Active");
+  document.querySelector(".bar--2").classList.toggle("bar2Active");
+  document.querySelector(".bar--3").classList.toggle("bar3Active");
+  document.querySelector(".hamLinks").classList.toggle("displayBlock");
+  document.querySelector(".hamLinksBg").classList.toggle("hamLinksBgActive");
+  document.querySelector(".bgShade").classList.toggle("bgShadeActive");
+};
+
+var removeNav = function () {
+  document.querySelector(".bar--1").classList.remove("bar1Active");
+  document.querySelector(".bar--2").classList.remove("bar2Active");
+  document.querySelector(".bar--3").classList.remove("bar3Active");
+  document.querySelector(".hamLinks").classList.remove("displayBlock");
+  document.querySelector(".hamLinksBg").classList.remove("hamLinksBgActive");
+  document.querySelector(".bgShade").classList.remove("bgShadeActive");
+};
+
+var showTodoApp = function () {
+  document.querySelector(".todo__wrapper").style.display = "block";
+  document.querySelector(".budget__wrapper").style.display = "none";
+  document.querySelector(".todo__button").classList.add("todo__button--active");
+  document
+    .querySelector(".budget__button")
+    .classList.remove("budget__button--active");
+};
+
+var showBudgetApp = function () {
+  document.querySelector(".todo__wrapper").style.display = "none";
+  document.querySelector(".budget__wrapper").style.display = "block";
+  document
+    .querySelector(".todo__button")
+    .classList.remove("todo__button--active");
+  document
+    .querySelector(".budget__button")
+    .classList.add("budget__button--active");
+  document.querySelector(".fa-plus-square").classList.add("inc--active");
+  document.querySelector(".fa-minus-square").classList.remove("dec--active");
+  document.querySelector(".fa-check-square").classList.add("green");
+  document.querySelector(".fa-check-square").classList.remove("red");
+  document.querySelector(".inc__btn").classList.add("inc__btn--active");
+  document.querySelector(".dec__btn").classList.remove("dec__btn--active");
+  document.querySelector(".inc__wrapper").style.display = "block";
+  document.querySelector(".dec__wrapper").style.display = "none";
+  incrementValue = "inc";
+};
+
+var mql = window.matchMedia("(min-width: 786px)");
+
+function screenTest(e) {
+  if (e.matches) {
+    removeNav();
+  }
+}
+
+mql.addListener(screenTest);
 
 var temp = "";
 var incrementValue = "inc";

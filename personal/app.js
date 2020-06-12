@@ -1,5 +1,3 @@
-
-
 //UI CONTROLLER
 var UIcontroller = (function () {
   var DOMstrings = {

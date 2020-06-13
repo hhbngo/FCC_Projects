@@ -121,9 +121,7 @@ GetStudio.getMovies()
         showcaseView.renderPhantomCovers();
         fullMovieList = data;
         getLikedStorage();
-        console.log(likedList);
         const currentLikes = fullMovieList.filter(obj => likedList.includes(obj.id));
-        console.log(currentLikes);
         document.querySelector('.liked-card-box').innerHTML = "";
         currentLikes.forEach(movie => likesView.renderLikes(movie));
     });

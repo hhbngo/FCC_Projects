@@ -13,12 +13,12 @@ export const sortShowcase = (selectValue, movieList) => {
             break;
         case "3":
             sortedList = movieList.sort((a, b) => {
-                return (parseInt(a.rt_score.replace('%', "")) > parseInt(b.rt_score.replace('%', ""))) ? 1 : -1
+                return (parseInt(a.rt_score.replace('%', "")) < parseInt(b.rt_score.replace('%', ""))) ? 1 : -1
             });
             break;
         case "4":
             sortedList = movieList.sort((a, b) => {
-                return (a.rt_score.replace(/^\d+$/g, "") < b.rt_score.replace(/^\d+$/g, "")) ? 1 : -1
+                return (a.rt_score.replace(/^\d+$/g, "") > b.rt_score.replace(/^\d+$/g, "")) ? 1 : -1
             });
             break;
         case "5":

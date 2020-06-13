@@ -415,7 +415,9 @@ body {
     .info__heart-btn {
       font-size: 15vw;
       bottom: 1rem;
-      right: 2rem; } }
+      right: 2rem; }
+    .info__card {
+      margin: 0 auto; } }
 
 .liked {
   color: #f1687f; }

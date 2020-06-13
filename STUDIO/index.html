@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/116c39369e.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script type="module" src="./js/index.js"></script>
+
+    <title>Studio</title>
+</head>
+
+<body>
+    <nav>
+        <div class="logo-box">
+            <img src="img/studio-ghibli.svg" alt="Totoro" class="logo-box__logo">
+            <div class="logo-box__title">Studio</div>
+        </div>
+    </nav>
+    <main>
+        <div class="portal">
+            <div class="portal__nav">
+                <div class="portal__search-main">
+                    <i class="fas fa-search portal__search"></i>
+                    <div class="portal__input">
+                        <input type="text" name="search" id="search" class="se">
+                        <label for="search" class="search-label"></label>
+                    </div>
+                </div>
+                <div class="portal__like-box">
+                    <div class="heart-container">
+                        <i class="far fa-heart fa-heart-outline"></i>
+                    </div>
+                    <div class="portal__like-window">
+                        <div class="portal__like-title">
+                            Liked Movies
+                        </div>
+                        <div class="portal__like-close-btn">
+                            <i class="fas fa-times-circle close-window-btn"></i>
+                        </div>
+                        <div class="liked-card-box">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sort">
+                <select name="sort" id="sort-select" class="sort__select">
+                    <option value="0" disabled selected>Sort</option>
+                    <option value="1">A-Z</option>
+                    <option value="2">Z-A</option>
+                    <option value="3">Rating (descending)</option>
+                    <option value="4">Rating (ascending)</option>
+                    <option value="5">Release (Newest)</option>
+                    <option value="6">Release (Oldest)</option>
+                </select>
+            </div>
+
+            <section class="showcase">
+            </section>
+            <div class="showcase__movie-card showcase__movie-card--phantom">
+            </div>
+            <div class="showcase__movie-card showcase__movie-card--phantom">
+            </div>
+            <div class="showcase__movie-card showcase__movie-card--phantom">
+            </div>
+            <div class="showcase__movie-card showcase__movie-card--phantom">
+            </div>
+        </div>
+
+    </main>
+    <!--<footer>
+        <p>
+            Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a
+                href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+        </p>
+    </footer>-->
+
+</body>
+
+</html>

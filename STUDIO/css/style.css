@@ -269,7 +269,8 @@ body {
 @media (max-width: 426px) {
   .sort__select {
     left: 50%;
-    transform: translateX(-50%); } }
+    transform: translateX(-50%);
+    width: 90%; } }
 
 .showcase {
   display: flex;
@@ -401,13 +402,20 @@ body {
       font-size: 3.7vw; }
     .info__card {
       padding-right: 2rem;
-      padding-left: 2rem; }
+      padding-left: 2rem;
+      padding-top: 2rem; }
     .info p {
       margin-bottom: 2rem; }
     .info h2 {
       font-size: 7vw; }
     .info__img {
-      width: 30%; } }
+      width: 30%; }
+    .info__close-btn {
+      font-size: 3.2rem; }
+    .info__heart-btn {
+      font-size: 15vw;
+      bottom: 1rem;
+      right: 2rem; } }
 
 .liked {
   color: #f1687f; }

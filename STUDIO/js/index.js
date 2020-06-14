@@ -114,7 +114,7 @@ document.body.addEventListener('click', e => {
         history.pushState("", document.title, window.location.pathname);
     } else if (e.target.classList.contains('like-heart')) {
         controlLike(e.target);
-    }
+    };
 });
 
 document.getElementById("sort-select").addEventListener('change', e => {
@@ -122,6 +122,10 @@ document.getElementById("sort-select").addEventListener('change', e => {
     tempMovieList = sortView.sortShowcase(e.target.value, tempMovieList);
     showcaseView.renderPhantomCovers();
 });
+
+document.querySelector('.logo-box').addEventListener('click', function () {
+    location.reload();
+})
 
 GetStudio.getMovies()
     .then(data => {

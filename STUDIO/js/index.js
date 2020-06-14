@@ -1,8 +1,8 @@
 import * as GetStudio from './models/GetStudio.js';
 import * as showcaseView from './views/showcaseView.js';
-import * as infoView from './views/infoView.js'
-import * as likesView from './views/likesView.js'
-import * as sortView from './views/sortView.js'
+import * as infoView from './views/infoView.js';
+import * as likesView from './views/likesView.js';
+import * as sortView from './views/sortView.js';
 
 
 let fullMovieList = [];
@@ -24,10 +24,17 @@ const persistLikeData = () => {
 const controlInfo = () => {
     const id = window.location.hash.replace('#', '');
 
-    if (id !== "" && !document.querySelector('.info')) {
+    if (id !== "") {
+        if (document.querySelector('.info')) {
+            infoView.deleteInfo();
+        };
         const selectedMovie = fullMovieList.find(movie => movie.id == id);
         const isLiked = likedList.some(id => id == selectedMovie.id);
         infoView.renderInfo(selectedMovie, isLiked);
+    } else if (id == "") {
+        if (document.querySelector('.info')) {
+            infoView.deleteInfo();
+        };
     }
 }
 
@@ -49,7 +56,7 @@ const controlLike = (e) => {
         const currentLikes = likedList.map(likedID => { return fullMovieList.find(movie => movie.id == likedID) });
         document.querySelector('.liked-card-box').innerHTML = "";
         currentLikes.forEach(movie => likesView.renderLikes(movie));
-    }
+    };
 
 }
 
@@ -65,7 +72,7 @@ document.getElementById('search').addEventListener('keyup', e => {
     showcaseView.clearMovieCovers();
     searchMatches.forEach(movie => {
         showcaseView.renderMovieCover(movie);
-    })
+    });
     showcaseView.renderPhantomCovers();
 })
 
@@ -104,7 +111,6 @@ document.querySelector('.close-window-btn').addEventListener('click', function (
 document.body.addEventListener('click', e => {
     if (e.target.classList.contains('info__close-btn')) {
         infoView.deleteInfo();
-        history.pushState("", document.title, window.location.pathname);
     } else if (e.target.classList.contains('like-heart')) {
         controlLike(e.target);
     }
@@ -114,9 +120,7 @@ document.getElementById("sort-select").addEventListener('change', e => {
     showcaseView.clearMovieCovers();
     tempMovieList = sortView.sortShowcase(e.target.value, tempMovieList);
     showcaseView.renderPhantomCovers();
-})
-
-// INIT
+});
 
 GetStudio.getMovies()
     .then(data => {

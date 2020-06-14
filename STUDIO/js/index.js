@@ -111,6 +111,7 @@ document.querySelector('.close-window-btn').addEventListener('click', function (
 document.body.addEventListener('click', e => {
     if (e.target.classList.contains('info__close-btn')) {
         infoView.deleteInfo();
+        history.pushState("", document.title, window.location.pathname);
     } else if (e.target.classList.contains('like-heart')) {
         controlLike(e.target);
     }

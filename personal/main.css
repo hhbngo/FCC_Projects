@@ -744,6 +744,10 @@ body {
   .header__wrapper h1 {
     font-size: 3.6em;
   }
+  
+  .bordershadow h2 {
+    font-size: 1.4em;
+  }
 }
 
 @media (hover: hover) {

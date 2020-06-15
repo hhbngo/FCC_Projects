@@ -671,7 +671,6 @@ var controller = (function (uiCtrl, dataCtrl) {
 
   return {
     init: function () {
-      console.log("Application has started.");
       setupEventListeners();
       showTodoApp();
       document.querySelector(".inc__btn").classList.toggle("inc__btn--active");

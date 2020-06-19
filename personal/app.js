@@ -5,7 +5,7 @@ var UIcontroller = (function () {
     bar2: ".bar--2",
     bar3: ".bar--3",
   };
-
+  
   var formatNumber = function (num, type) {
     return (type === "inc" ? "+ " : "") + num.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
   };
@@ -13,8 +13,34 @@ var UIcontroller = (function () {
   var formatNumber2 = function (num, type) {
     return (type === "inc" ? "+ " : "- ") + num.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
   };
-
+  
+  var checkedIDs = [];
+  
+  var persistCheckedIDs = function() {
+    localStorage.setItem('checks', JSON.stringify(checkedIDs));
+  };
+  
+  
   return {
+    restoreCheckedTasks: function() {
+       const storage = JSON.parse(localStorage.getItem('checks'));
+       if (storage) checkedIDs = storage;
+       checkedIDs.forEach(taskID => {
+               let taskString = DATAcontroller.readTask().find(task => task.id == taskID).task;
+               document.getElementById(taskID).classList.toggle("crossOut");
+               document.getElementById(taskID).classList.add("checked");
+               document.getElementById(taskID).classList.remove("unchecked");
+               document.getElementById(taskID).innerHTML = '<div class="wrapcheck"><div class="checks"><i class= "far fa-circle"></i></div><p>' + taskString + '</p></div><i class="fas fa-trash-alt"></i>';
+               });
+    },
+    updateCheckedListAdd: function(taskId) {
+        checkedIDs.push(taskId);
+        persistCheckIDs();
+    },
+    updateCheckedListRemove: function(taskId) {
+        checkedIDs.splice(checkedIDs.findIndex(id => id == taskId), 1);
+        persistCheckIDs();        
+    },
     getDOMstrings: function () {
       return DOMstrings;
     },
@@ -215,6 +241,7 @@ var DATAcontroller = (function () {
       (this.descrition = descrition),
       (this.amount = amount);
   };
+  
 
   var taskList = [];
   var budgetList = {
@@ -234,7 +261,7 @@ var DATAcontroller = (function () {
   var persistBudgetData = function (type) {
     localStorage.setItem(`${type}`, JSON.stringify(budgetList[type]));
   };
-
+  
   return {
     pushInput: function (input) {
       var newItem, ID;
@@ -545,6 +572,7 @@ var controller = (function (uiCtrl, dataCtrl) {
       uiCtrl.swapEditButton(checkParent, taskList);
       document.getElementById(checkParent.id).classList.add("checked");
       document.getElementById(checkParent.id).classList.remove("unchecked");
+      uiCtrl.updateCheckedListAdd(checkParent.id);
       uiCtrl.completeCheck();
     } else if (
       check.classList.contains("fa-circle") &&
@@ -557,6 +585,7 @@ var controller = (function (uiCtrl, dataCtrl) {
       document.getElementById(checkParent.id).classList.add("unchecked");
       document.getElementById(checkParent.id).classList.remove("checked");
       uiCtrl.restoreTaskState(checkParent.id);
+      uiCtrl.updateCheckedListRemove(checkParent.id);
       uiCtrl.completeCheck();
     } else if (check.classList.contains("fa-times-circle")) {
       if (document.getElementById("inputEdit")) {
@@ -679,13 +708,14 @@ var controller = (function (uiCtrl, dataCtrl) {
       document.querySelector(".dec__wrapper").style.display = "none";
       dataCtrl.readTaskStorage();
       dataCtrl.readTask().forEach(task => uiCtrl.addTaskItem(task));
+      uiCtrl.restoreCheckedTasks();
+      uiCtrl.completeCheck();
       dataCtrl.readBudgetStorage();
       dataCtrl.readBudgetInc().forEach(inc => uiCtrl.addNewItem(inc));
       dataCtrl.readBudgetDec().forEach(dec => uiCtrl.addNewItem(dec));
       dataCtrl.updateData('inc');
       dataCtrl.updateData('dec');
       uiCtrl.updateBudgetUI(dataCtrl.getBudgetData());
-      uiCtrl.completeCheck();
     },
   };
 })(UIcontroller, DATAcontroller);

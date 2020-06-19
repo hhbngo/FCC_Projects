@@ -639,12 +639,12 @@ var controller = (function (uiCtrl, dataCtrl) {
         .querySelector(".slideout")
         .addEventListener("transitionend", function (event) {
           if (event.propertyName == "opacity") {
-            dataCtrl.deleteTaskData(trashBtnID);
-            uiCtrl.deleteTaskUI(trashBtnID);
-            uiCtrl.completeCheck();
             if (document.getElementById(trashBtnID).classList.contains("checked")) {
                     uiCtrl.updateCheckedListRemove(trashBtnID);
             }
+            dataCtrl.deleteTaskData(trashBtnID);
+            uiCtrl.deleteTaskUI(trashBtnID);
+            uiCtrl.completeCheck();
           }
         });
     }

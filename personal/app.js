@@ -642,7 +642,7 @@ var controller = (function (uiCtrl, dataCtrl) {
             dataCtrl.deleteTaskData(trashBtnID);
             uiCtrl.deleteTaskUI(trashBtnID);
             uiCtrl.completeCheck();
-            if (document.getElementById(trashBtnID).classList.contains("checked") {
+            if (document.getElementById(trashBtnID).classList.contains("checked")) {
                     uiCtrl.updateCheckedListRemove(trashBtnID);
             }
           }

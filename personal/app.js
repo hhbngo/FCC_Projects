@@ -611,6 +611,7 @@ var controller = (function (uiCtrl, dataCtrl) {
           if (event.propertyName == "opacity") {
             dataCtrl.deleteTaskData(trashBtnID);
             uiCtrl.deleteTaskUI(trashBtnID);
+            uiCtrl.completeCheck();
           }
         });
     }

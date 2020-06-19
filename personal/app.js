@@ -156,6 +156,7 @@ var UIcontroller = (function () {
               if (event.propertyName == "opacity") {
                 DATAcontroller.deleteTaskData(current.id);
                 current.remove();
+                UIcontroller.updateCheckedListRemove(current.id);
               }
             });
         }

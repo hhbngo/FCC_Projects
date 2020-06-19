@@ -642,7 +642,9 @@ var controller = (function (uiCtrl, dataCtrl) {
             dataCtrl.deleteTaskData(trashBtnID);
             uiCtrl.deleteTaskUI(trashBtnID);
             uiCtrl.completeCheck();
-            uiCtrl.updateCheckedListRemove(trashBtnID);
+            if (document.getElementById(trashBtnID).classList.contains("checked") {
+                    uiCtrl.updateCheckedListRemove(trashBtnID);
+            }
           }
         });
     }

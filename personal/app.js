@@ -35,11 +35,11 @@ var UIcontroller = (function () {
     },
     updateCheckedListAdd: function(taskId) {
         checkedIDs.push(taskId);
-        persistCheckIDs();
+        persistCheckedIDs();
     },
     updateCheckedListRemove: function(taskId) {
         checkedIDs.splice(checkedIDs.findIndex(id => id == taskId), 1);
-        persistCheckIDs();        
+        persistCheckedIDs();        
     },
     getDOMstrings: function () {
       return DOMstrings;

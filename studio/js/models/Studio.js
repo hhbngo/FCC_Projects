@@ -17,7 +17,7 @@ export default class Studio {
     }
 
     filterMovies(str) {
-        const filteredList = this.tempList.filter(movie => movie.title.toLowerCase().includes(str));
+        const filteredList = this.movieList.filter(movie => movie.title.toLowerCase().includes(str));
         this.tempList = filteredList;
     }
 

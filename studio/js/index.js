@@ -85,7 +85,7 @@ window.addEventListener('hashchange', controlInfo);
 
 document.querySelector('.portal__search').addEventListener('click', searchView.focusSearch);
 
-document.getElementById('search').addEventListener('keyup', e => controlSearch(e.target.value));
+document.getElementById('search').addEventListener('input', e => controlSearch(e.target.value));
 
 document.getElementById('search').addEventListener('focusout', controlFocusOut);
 

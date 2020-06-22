@@ -56,6 +56,8 @@ const controlLikeRend = () => {
 const controlSearch = (str) => {
     state.studio.filterMovies(str.toLowerCase());
     showcaseView.clearMovieCovers();
+    const sortVal = document.getElementById("sort-select").value;
+    if (sortVal !== 0) state.studio.sortMovies(sortVal);
     showcaseView.renderMovies(state.studio.tempList);
     showcaseView.renderPhantomCovers();
 }

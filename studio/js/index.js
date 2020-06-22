@@ -5,10 +5,10 @@ import * as likeView from './views/likeView.js';
 import * as infoView from './views/infoView.js'
 import * as searchView from './views/searchView.js';
 
+
 const state = {};
 
 // CONTROLLERS
-
 const controlGetStudio = async () => {
     state.studio = new Studio();
     state.likes = new Like();
@@ -76,9 +76,7 @@ const controlSort = (n) => {
     showcaseView.renderPhantomCovers();
 }
 
-
 // EVENTLISTENERS
-
 window.addEventListener('load', controlGetStudio);
 
 window.addEventListener('hashchange', controlInfo);
@@ -99,4 +97,4 @@ document.body.addEventListener('click', e => controlInfoClick(e.target));
 
 document.querySelector('.logo-box').addEventListener('click', function () {
     location.reload();
-})
+});

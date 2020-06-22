@@ -9,7 +9,6 @@ let fullMovieList = [];
 let tempMovieList = [];
 let likedList = [];
 
-
 const getLikedStorage = () => {
     const storage = JSON.parse(localStorage.getItem('likes'));
     if (storage) likedList = storage;
@@ -20,10 +19,8 @@ const persistLikeData = () => {
 }
 
 // CONTROLLERS
-
 const controlInfo = () => {
     const id = window.location.hash.replace('#', '');
-
     if (id !== "") {
         if (document.querySelector('.info')) {
             infoView.deleteInfo();
@@ -40,7 +37,6 @@ const controlInfo = () => {
 
 const controlLike = (e) => {
     const likeID = e.parentNode.parentNode.id
-
     if (e.classList.contains('liked')) {
         e.classList.remove('liked');
         const idIndex = likedList.findIndex(id => id == likeID)
@@ -66,7 +62,6 @@ window.addEventListener('hashchange', controlInfo);
 
 document.getElementById('search').addEventListener('keyup', e => {
     const searchString = e.target.value.toLowerCase();
-
     const searchMatches = fullMovieList.filter(movie => movie.title.toLowerCase().includes(searchString));
     tempMovieList = searchMatches;
     showcaseView.clearMovieCovers();
@@ -81,9 +76,7 @@ document.querySelector('.portal__search').addEventListener('click', function () 
     document.getElementById('search').style.display = "block";
     document.getElementById('search').focus();
     document.querySelector('.portal__search').style.pointerEvents = "none";
-
-}
-);
+});
 
 document.getElementById('search').addEventListener('focusout', function () {
     document.querySelector('.search-label').style.opacity = 0;
@@ -106,7 +99,6 @@ document.querySelector('.close-window-btn').addEventListener('click', function (
     document.querySelector('.fa-heart').classList.toggle('active1');
     document.querySelector('.portal__like-window').classList.toggle('portal__like-window--active');
 });
-
 
 document.body.addEventListener('click', e => {
     if (e.target.classList.contains('info__close-btn')) {
@@ -142,4 +134,3 @@ GetStudio.getMovies()
         document.querySelector('.liked-card-box').innerHTML = "";
         currentLikes.forEach(movie => likesView.renderLikes(movie));
     });
-

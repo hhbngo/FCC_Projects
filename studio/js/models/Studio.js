@@ -9,7 +9,7 @@ export default class Studio {
             movie.coverURL = movieCovers.find(obj => Object.keys(obj) == movie.title)[movie.title]
         });
         this.movieList = movieInfo;
-        this.tempList = movieInfo;
+        this.tempList = JSON.parse(JSON.stringify(movieInfo));
     }
 
     getSelected(id) {
@@ -17,11 +17,12 @@ export default class Studio {
     }
 
     filterMovies(str) {
-        this.tempList = this.movieList.filter(movie => movie.title.toLowerCase().includes(str));
+        const filteredList = this.tempList.filter(movie => movie.title.toLowerCase().includes(str));
+        this.tempList = filteredList;
     }
 
     resetList() {
-        this.tempList = this.movieList;
+        this.tempList = JSON.parse(JSON.stringify(this.movieList));
     }
 
     sortMovies(type) {
@@ -43,7 +44,7 @@ export default class Studio {
                 break;
             case "4":
                 this.tempList.sort((a, b) => {
-                    return (a.rt_score.replace(/^\d+$/g, "") > b.rt_score.replace(/^\d+$/g, "")) ? 1 : -1
+                    return (parseInt(a.rt_score.replace('%', "")) > parseInt(b.rt_score.replace('%', ""))) ? 1 : -1
                 });
                 break;
             case "5":

@@ -64,8 +64,10 @@ const controlFocusOut = () => {
     searchView.focusOut();
     if (state.studio.tempList.length == 0) {
         showcaseView.clearMovieCovers();
-        showcaseView.renderMovies(state.studio.movieList);
         state.studio.resetList();
+        showcaseView.renderMovies(state.studio.movieList);
+        showcaseView.renderPhantomCovers();
+        showcaseView.resetSort();
     };
 }
 

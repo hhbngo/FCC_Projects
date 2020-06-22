@@ -66,7 +66,6 @@ const controlFocusOut = () => {
         showcaseView.clearMovieCovers();
         showcaseView.renderMovies(state.studio.movieList);
         state.studio.resetList();
-        showcaseView.resetSort();
     };
 }
 

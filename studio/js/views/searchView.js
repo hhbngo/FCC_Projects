@@ -3,6 +3,7 @@ export const focusSearch = () => {
     document.getElementById('search').style.display = "block";
     document.getElementById('search').focus();
     document.querySelector('.portal__search').style.pointerEvents = "none";
+    document.getElementById("sort-select").selectedIndex = 0;
 }
 
 export const focusOut = () => {

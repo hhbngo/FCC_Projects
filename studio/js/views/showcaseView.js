@@ -29,3 +29,7 @@ export const renderPhantomCovers = () => {
 export const clearMovieCovers = () => {
     document.querySelector('.showcase').innerHTML = "";
 }
+
+export const resetSort = () => {
+    document.getElementById("sort-select").selectedIndex = 0;
+}

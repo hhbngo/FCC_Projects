@@ -317,6 +317,10 @@ body {
   cursor: pointer;
 }
 
+.crossOut {
+  opacity: .4 !important;
+}
+
 .crossOut p {
   text-decoration: line-through;
   text-decoration-color: rgb(48, 152, 212);

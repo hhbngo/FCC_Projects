@@ -280,7 +280,7 @@ body {
 
 .slideout {
   transform: translateX(50px);
-  opacity: 0;
+  opacity: 0 !important;
   transition: 0.3s;
 }
 
@@ -318,7 +318,7 @@ body {
 }
 
 .crossOut {
-  opacity: .4 !important;
+  opacity: .4;
 }
 
 .crossOut p {

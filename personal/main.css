@@ -319,6 +319,7 @@ body {
 
 .crossOut {
   opacity: .4;
+  transition: .3s;
 }
 
 .crossOut p {

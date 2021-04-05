@@ -4,7 +4,7 @@ export default class Studio {
 
     async getMovies() {
         const movieInfo = await fetchApiData('https://ghibliapi.herokuapp.com/films');
-        const movieCovers = await fetchApiData('https://gist.githubusercontent.com/hhbngo/c808284f5092d47499605219b4cf94d4/raw/db4ab827d85053e0c1769430b9a7913509d01487/movieCover.json');
+        const movieCovers = await fetchApiData('https://gist.githubusercontent.com/hhbngo/c808284f5092d47499605219b4cf94d4/raw/e25a488c9724ab929581c8213ae320bc40aa6bd9/movieCover.json');
         movieInfo.forEach(movie => {
             movie.coverURL = movieCovers.find(obj => Object.keys(obj) == movie.title)[movie.title]
         });
